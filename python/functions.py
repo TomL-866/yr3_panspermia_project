@@ -16,10 +16,13 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     and saves in the output/graphs directory.
 
     Args:
-        stellar_mass_array (np.ndarray): Stellar mass array from quantile function (see equations.py)
+        stellar_mass_array (np.ndarray): Stellar mass array (SI units) from quantile func (see equations.py)
     """
+
     plt.figure()
-    plt.hist(stellar_mass_array / astro_const.M_sun.value, bins=50, log=True)
+    plt.hist(stellar_mass_array / astro_const.M_sun.value, bins=100, log=True)
+    plt.xlabel("Stellar Mass (M_sun)")
+    plt.ylabel("Frequency")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
 
 
@@ -28,8 +31,9 @@ def save_imf_values(u: np.ndarray, stellar_mass_array: np.ndarray) -> None:
 
     Args:
         u (np.ndarray): Array of random numbers between 0 and 1
-        stellar_mass_array (np.ndarray): Stellar mass array from quantile function (see equations.py)
+        stellar_mass_array (np.ndarray): Stellar mass array (SI units) from quantile func (see equations.py)
     """
+
     csv_dir = get_base_dir() + "/output/csv"
     np.savetxt(
         csv_dir + "/imf_values.csv",

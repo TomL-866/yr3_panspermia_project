@@ -13,7 +13,7 @@ def quantile_func(u: float) -> float:
         u (np.ndarray): Array of random numbers between 0 and 1
 
     Returns:
-        np.ndarray: Result array of quantile function, which is a stellar mass.
+        np.ndarray: Result array of quantile function, which is a stellar mass in SI units.
     """
 
     mu: float = 0.2 * astro_const.M_sun.value
@@ -42,8 +42,9 @@ def auxiliary_func(stellar_mass: float) -> float:
         stellar_mass (float): Stellar mass
 
     Returns:
-        float: Result of auxiliary function
+        float: Result of auxiliary function (SI units)
     """
+
     mu: float = 0.2 * astro_const.M_sun.value
     alpha: float = 2.3
     beta: float = 1.4
