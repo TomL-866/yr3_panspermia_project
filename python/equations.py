@@ -10,10 +10,10 @@ def quantile_func(u: float) -> float:
     except from the upper and lower mass limits.
 
     Args:
-        u (np.ndarray): Array of random numbers between 0 and 1
+        u (float): Random number between 0 and 1
 
     Returns:
-        np.ndarray: Result array of quantile function, which is a stellar mass in SI units.
+        float: Result of quantile function, which is a stellar mass in SI units.
     """
 
     mu: float = 0.2 * astro_const.M_sun.value
