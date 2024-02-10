@@ -20,7 +20,12 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     """
 
     plt.figure()
-    plt.hist(stellar_mass_array / astro_const.M_sun.value, bins=100, log=True)
+    bins: list[float] = list(np.linspace(0, 50, 50))
+    plt.hist(
+        stellar_mass_array / astro_const.M_sun.value,
+        bins=bins,
+        log=True,
+    )
     plt.xlabel("Stellar Mass (M_sun)")
     plt.ylabel("Frequency")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
