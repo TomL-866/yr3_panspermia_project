@@ -5,7 +5,7 @@ import astropy.constants as astro_const
 
 def quantile_func(u: float) -> float:
     """This function replicates the quantile function,
-    equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
+    Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
     Values of constants are taken directly from the paper,
     except from the upper and lower mass limits.
 
@@ -35,11 +35,11 @@ def quantile_func(u: float) -> float:
 
 def auxiliary_func(stellar_mass: float) -> float:
     """This function replicates the auxiliary function,
-    equation 1 in Table 1 of https://doi.org/10.1093/mnras/sts479.
+    Equation 1 in Table 1 of https://doi.org/10.1093/mnras/sts479.
     Values of constants are taken directly from the paper.
 
     Args:
-        stellar_mass (float): Stellar mass
+        stellar_mass (float): Stellar mass (SI units)
 
     Returns:
         float: Result of auxiliary function (SI units)
