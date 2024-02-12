@@ -9,7 +9,7 @@ from python.equations import quantile_func
 def main() -> None:
     """Main function"""
 
-    runs: int = 10_000
+    runs: int = 1_000_000
 
     u: np.ndarray = np.array([np.random.uniform(0, 1) for _ in range(runs)])
     stellar_mass_arr: np.ndarray = np.array(

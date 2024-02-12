@@ -1,5 +1,6 @@
 """Module contains functions useful for completing parts of the project"""
 
+from typing import Sequence
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,12 +21,13 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     """
 
     plt.figure()
-    bins: list[float] = list(np.linspace(0, 50, 50))
+    bins: list[float] = list(np.logspace(0, np.log10(50), num=50))
     plt.hist(
         stellar_mass_array / astro_const.M_sun.value,
         bins=bins,
-        log=True,
     )
+    plt.yscale("log")
+    plt.xscale("log")
     plt.xlabel("Stellar Mass (M$_{Sun}$)")
     plt.ylabel("Frequency")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
