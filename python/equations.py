@@ -1,8 +1,9 @@
 """This module contains functions representing equations in https://doi.org/10.1093/mnras/sts479"""
 
-import astropy.constants as astro_const
+from numba import njit
 
 
+@njit
 def quantile_func(u: float) -> float:
     """This function replicates the quantile function,
     Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
@@ -16,12 +17,13 @@ def quantile_func(u: float) -> float:
         float: Result of quantile function, which is a stellar mass in SI units.
     """
 
-    mu: float = 0.2 * astro_const.M_sun.value
+    solar_mass: float = 1.98840987e30  # SI units
+    mu: float = 0.2 * solar_mass
     alpha: float = 2.3
     beta: float = 1.4
 
-    upper_mass_limit: float = 50 * astro_const.M_sun.value
-    lower_mass_limit: float = 0.1 * astro_const.M_sun.value
+    upper_mass_limit: float = 50 * solar_mass
+    lower_mass_limit: float = 0.1 * solar_mass
 
     return mu * (
         (
@@ -33,6 +35,7 @@ def quantile_func(u: float) -> float:
     ) ** (1 / (1 - alpha))
 
 
+@njit
 def auxiliary_func(stellar_mass: float) -> float:
     """This function replicates the auxiliary function,
     Equation 1 in Table 1 of https://doi.org/10.1093/mnras/sts479.
@@ -45,7 +48,8 @@ def auxiliary_func(stellar_mass: float) -> float:
         float: Result of auxiliary function (SI units)
     """
 
-    mu: float = 0.2 * astro_const.M_sun.value
+    solar_mass: float = 1.98840987e30  # SI units
+    mu: float = 0.2 * solar_mass
     alpha: float = 2.3
     beta: float = 1.4
 

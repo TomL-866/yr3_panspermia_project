@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from python.functions import save_imf_values, plot_imf_histogram
+from python.functions import plot_imf_histogram, save_imf_values
 from python.equations import quantile_func
 
 
@@ -11,10 +11,10 @@ def main() -> None:
 
     runs: int = 1_000_000
 
-    u: np.ndarray = np.array([np.random.uniform(0, 1) for _ in range(runs)])
-    stellar_mass_arr: np.ndarray = np.array(
-        [quantile_func(u[x]) for x in range(runs)]
-    )  # SI units
+    u = np.random.uniform(0, 1, runs)
+    stellar_mass_arr = np.vectorize(quantile_func)(u)  # SI units
 
+    print("Saving IMF values to CSV...")
     save_imf_values(u, stellar_mass_arr)
+    print("Plotting IMF histogram...")
     plot_imf_histogram(stellar_mass_arr)

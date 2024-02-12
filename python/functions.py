@@ -1,6 +1,5 @@
 """Module contains functions useful for completing parts of the project"""
 
-from typing import Sequence
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,8 +27,9 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     )
     plt.yscale("log")
     plt.xscale("log")
-    plt.xlabel("Stellar Mass (M$_{Sun}$)")
+    plt.xlabel("Stellar Mass (M$_{\odot}$)")
     plt.ylabel("Frequency")
+    plt.title("Initial Mass Function (IMF) Histogram")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
 
 
@@ -41,7 +41,7 @@ def save_imf_values(u: np.ndarray, stellar_mass_array: np.ndarray) -> None:
         stellar_mass_array (np.ndarray): Stellar mass array (SI units) from quantile func (see equations.py)
     """
 
-    csv_dir = get_base_dir() + "/output/csv"
+    csv_dir: str = get_base_dir() + "/output/csv"
     np.savetxt(
         csv_dir + "/imf_values.csv",
         np.column_stack((u, stellar_mass_array)),
