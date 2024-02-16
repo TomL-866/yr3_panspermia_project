@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from python.IMF.functions import plot_imf_histogram
-from python.IMF.equations import quantile_func
+from python.IMF.plot_and_save import plot_imf_histogram
+from python.IMF.quantile_func import quantile_func
 
 
 def main() -> None:
