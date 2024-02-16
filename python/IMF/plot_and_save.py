@@ -1,5 +1,3 @@
-"""Module contains functions useful for completing parts of the project"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 import astropy.constants as astro_const

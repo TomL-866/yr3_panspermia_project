@@ -6,8 +6,10 @@ from numba import njit
 def find_disk_radius(stellar_mass: float) -> float:
     """Get disk radius from stellar mass
 
+    Args:
+        stellar_mass (float): Stellar mass in SI units
     Returns:
-        float: Radius of disk
+        float: Radius of disk in SI units
     """
     au_to_m: float = 1.49597871e11
     m_sun: float = 1.98840987e30  # SI units
@@ -18,12 +20,13 @@ def find_disk_radius(stellar_mass: float) -> float:
 def find_volume(disk_radius: float) -> float:
     """Get volume from disk radius and height
 
+    Args:
+        disk_radius (float): Radius of disk in SI units
     Returns:
-        float: Volume of disk
+        float: Volume of disk in SI units
     """
     au_to_m: float = 1.49597871e11
     disk_height: float = 0.1 * au_to_m
-
     return np.pi * disk_radius**2 * disk_height
 
 
@@ -31,8 +34,10 @@ def find_volume(disk_radius: float) -> float:
 def find_disk_mass(stellar_mass: float) -> float:
     """Get disk mass from stellar mass
 
+    Args:
+        stellar_mass (float): Stellar mass in SI units
     Returns:
-        float: Mass of disk
+        float: Mass of disk in SI units
     """
     return 0.1 * stellar_mass
 
@@ -41,8 +46,10 @@ def find_disk_mass(stellar_mass: float) -> float:
 def find_dust_mass(stellar_mass: float) -> float:
     """Get dust mass from stellar mass
 
+    Args:
+        stellar_mass (float): Stellar mass in SI units
     Returns:
-        float: Mass of dust
+        float: Mass of dust in disk in SI units
     """
     return 0.01 * find_disk_mass(stellar_mass)
 
@@ -51,8 +58,13 @@ def find_dust_mass(stellar_mass: float) -> float:
 def find_density(disk_volume: float, stellar_mass: float) -> float:
     """Get density from disk volume and stellar mass
 
+    Args:
+        disk_volume (float): Volume of disk in SI units
+        stellar_mass (float): Stellar mass in SI units
     Returns:
-        float: Density of disk
+        float: Density of disk in SI units
     """
-    dust_mass = find_dust_mass(stellar_mass)
+    dust_mass = find_dust_mass(
+        stellar_mass
+    )  # NOTE: This could be incorrect. Disk mass may be more appropriate.
     return dust_mass / disk_volume
