@@ -22,9 +22,29 @@ def find_volume(disk_radius: float) -> float:
         float: Volume of disk
     """
     au_to_m: float = 1.49597871e11
-    disk_height = 0.1 * au_to_m 
+    disk_height = 0.1 * au_to_m
 
     return np.pi * disk_radius**2 * disk_height
+
+
+@njit
+def find_disk_mass(stellar_mass: float) -> float:
+    """Get disk mass from stellar mass
+
+    Returns:
+        float: Mass of disk
+    """
+    return 0.1 * stellar_mass
+
+
+@njit
+def find_dust_mass(stellar_mass: float) -> float:
+    """Get dust mass from stellar mass
+
+    Returns:
+        float: Mass of dust
+    """
+    return 0.01 * find_disk_mass(stellar_mass)
 
 
 @njit
@@ -34,4 +54,5 @@ def find_density(disk_volume: float, stellar_mass: float) -> float:
     Returns:
         float: Density of disk
     """
-    return stellar_mass / disk_volume
+    dust_mass = find_dust_mass(stellar_mass)
+    return dust_mass / disk_volume
