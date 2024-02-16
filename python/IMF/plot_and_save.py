@@ -16,7 +16,7 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     """
 
     plt.figure()
-    bins: list[float] = list(np.logspace(0, np.log10(50), num=50))
+    bins: list[float] = list(np.logspace(np.log10(0.1), np.log10(50), num=100))
     plt.hist(
         stellar_mass_array / astro_const.M_sun.value,
         bins=bins,
@@ -27,9 +27,10 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     plt.ylabel("Frequency")
     plt.title("Initial Mass Function (IMF) Histogram")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
+    plt.close()
 
 
-def save_imf_values(u: np.ndarray, stellar_mass_array: np.ndarray) -> None:
+def save_imf_values(stellar_mass_array: np.ndarray) -> None:
     """This function saves u and stellar mass values to a CSV file
 
     Args:
@@ -40,7 +41,7 @@ def save_imf_values(u: np.ndarray, stellar_mass_array: np.ndarray) -> None:
     csv_dir: str = get_base_dir() + "/output/csv"
     np.savetxt(
         csv_dir + "/imf_values.csv",
-        np.column_stack((u, stellar_mass_array)),
+        stellar_mass_array,
         delimiter=",",
         header="u,stellar_mass",
         comments="",
