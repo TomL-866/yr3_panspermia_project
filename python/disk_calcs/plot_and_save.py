@@ -8,8 +8,8 @@ def plot_disk_mass_vs_density(disk_mass: np.ndarray, disk_density: np.ndarray) -
     disk_mass = np.sort(disk_mass)
     disk_density = np.sort(disk_density)
 
-    plt.plot(disk_mass / astro_const.M_sun.value, disk_density)
-    plt.xlabel("Disk Mass ($M_\\odot$)")
-    plt.ylabel("Disk Density (kg/m$^3$)")
+    plt.plot(disk_density, disk_mass / astro_const.M_sun.value)
+    plt.ylabel("Disk Mass ($M_\\odot$)")
+    plt.xlabel("Disk Density (kg/m$^3$)")
     plt.savefig(f"{get_base_dir()}/output/graphs/disk_mass_vs_density.png")
     plt.close()
