@@ -3,7 +3,7 @@ from numba import njit
 
 
 @njit
-def find_radius(stellar_mass: float) -> float:
+def find_disk_radius(stellar_mass: float) -> float:
     """Get disk radius from stellar mass
 
     Returns:
@@ -54,5 +54,5 @@ def find_density(disk_volume: float, stellar_mass: float) -> float:
     Returns:
         float: Density of disk
     """
-    disk_mass = find_disk_mass(stellar_mass)
-    return disk_mass / disk_volume
+    dust_mass = find_dust_mass(stellar_mass)
+    return dust_mass / disk_volume
