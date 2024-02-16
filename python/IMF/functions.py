@@ -1,14 +1,10 @@
 """Module contains functions useful for completing parts of the project"""
 
-import os
 import numpy as np
 import matplotlib.pyplot as plt
 import astropy.constants as astro_const
 
-
-def get_base_dir() -> str:
-    """This function returns the base directory of the project"""
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from python.helpers import get_base_dir
 
 
 def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:

@@ -1,4 +1,4 @@
-from python.main import main
+from python.IMF.main import main
 
 import time
 

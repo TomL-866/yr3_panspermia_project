@@ -2,7 +2,7 @@ from setuptools import setup
 from mypyc.build import mypycify
 
 # List of modules to be compiled
-modules = ["python/main.py", "python/functions.py"]
+modules = ["python/IMF/main.py", "python/IMF/functions.py", "python/helpers.py"]
 
 setup(
     name="Project",
