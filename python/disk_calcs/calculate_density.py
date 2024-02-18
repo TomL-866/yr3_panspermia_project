@@ -4,7 +4,9 @@ from numba import njit
 
 @njit
 def find_disk_radius(stellar_mass: float) -> float:
-    """Get disk radius from stellar mass
+    """Get disk radius from stellar mass.
+    This function is based on Equation 13
+    from https://doi.org/10.1093/mnras/stac1513
 
     Args:
         stellar_mass (float): Stellar mass in SI units
