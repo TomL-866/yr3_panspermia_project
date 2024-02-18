@@ -1,7 +1,7 @@
 import numpy as np
 
 from rust import get_stellar_masses
-from python.IMF.plot_and_save import plot_imf_histogram
+from python.IMF.plot_and_save import plot_imf_histogram, save_imf_values
 
 # from python.IMF.quantile_func import quantile_func  # Only uncomment if rust package is not working
 
@@ -25,3 +25,6 @@ def main(stellar_mass_arr: np.ndarray) -> None:
     """Main function"""
     print("Plotting IMF histogram...")
     plot_imf_histogram(stellar_mass_arr)
+
+    print("Saving stellar mass array...")
+    save_imf_values(stellar_mass_arr)

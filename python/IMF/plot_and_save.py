@@ -36,5 +36,5 @@ def save_imf_values(stellar_mass_array: np.ndarray) -> None:
         stellar_mass_array (np.ndarray): Stellar mass array (SI units) from quantile func (see equations.py)
     """
 
-    csv_dir: str = get_base_dir() + "/output/csv"
-    np.save(csv_dir + "/stellar_masses", stellar_mass_array)
+    values_dir: str = get_base_dir() + "/output/values"
+    np.save(values_dir + "/stellar_masses", stellar_mass_array)
