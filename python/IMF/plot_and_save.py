@@ -29,7 +29,7 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
 
 
 def save_imf_values(stellar_mass_array: np.ndarray) -> None:
-    """This function saves u and stellar mass values to a CSV file
+    """This function saves u and stellar mass values to a .npy file
 
     Args:
         u (np.ndarray): Array of random numbers between 0 and 1
@@ -37,10 +37,4 @@ def save_imf_values(stellar_mass_array: np.ndarray) -> None:
     """
 
     csv_dir: str = get_base_dir() + "/output/csv"
-    np.savetxt(
-        csv_dir + "/imf_values.csv",
-        stellar_mass_array,
-        delimiter=",",
-        header="u,stellar_mass",
-        comments="",
-    )
+    np.save(csv_dir + "/stellar_masses", stellar_mass_array)
