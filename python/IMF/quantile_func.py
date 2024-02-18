@@ -1,5 +1,3 @@
-"""This module contains functions representing equations in https://doi.org/10.1093/mnras/sts479"""
-
 from numba import njit
 
 

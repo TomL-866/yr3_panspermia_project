@@ -6,6 +6,7 @@ fonttools==4.48.1
 kiwisolver==1.4.5
 llvmlite==0.42.0
 matplotlib==3.8.2
+maturin==1.4.0
 mypy==1.8.0
 mypy-extensions==1.0.0
 numba==0.59.0

@@ -36,6 +36,6 @@ pub fn quantile_func(u: f64) -> f64 {
 /// Returns:
 ///  f64: The value of the auxiliary function for the given stellar mass.
 ///
-pub fn auxiliary_func(stellar_mass: f64) -> f64 {
+fn auxiliary_func(stellar_mass: f64) -> f64 {
     (1.0 + (stellar_mass / MU).powf(1.0 - ALPHA)).powf(1.0 - BETA)
 }

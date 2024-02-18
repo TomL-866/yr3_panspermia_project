@@ -1,5 +1,3 @@
-import rust
-
 import python.IMF.main as imf
 import python.disk_calcs.main as disk
 import time
@@ -8,10 +6,6 @@ from python.IMF.main import get_stellar_mass_array
 
 if __name__ == "__main__":
     start = time.perf_counter()
-
-    from inspect import getmembers, isfunction
-
-    print(getmembers(rust, isfunction))
 
     # Call get_stellar_mass_array() once
     stellar_mass_arr = get_stellar_mass_array()
