@@ -58,7 +58,7 @@ def find_dust_mass(stellar_mass: float) -> float:
 
 @njit
 def find_density(disk_volume: float, stellar_mass: float) -> float:
-    """Get density from disk volume and stellar mass
+    """Get disk density from disk volume and stellar mass
 
     Args:
         disk_volume (float): Volume of disk in SI units
