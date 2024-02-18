@@ -1,7 +1,7 @@
 # cd into rust
 cd rust
 # Build the project
-maturin develop --release
+maturin develop
 # cd out of rust
 cd ..
 # Run the project

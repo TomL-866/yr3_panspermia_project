@@ -23,9 +23,7 @@ fn get_stellar_masses() -> Vec<f64> {
         stellar_mass[i] = quantile_function::quantile_func(u[i]);
     } // Populate stellar_mass vector with values
 
-    let result = stellar_mass;
-    // Ok(result.into())
-    result
+    stellar_mass
 }
 
 #[pymodule]
