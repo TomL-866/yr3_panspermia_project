@@ -64,7 +64,5 @@ def find_density(disk_volume: float, stellar_mass: float) -> float:
     Returns:
         float: Density of disk in SI units
     """
-    dust_mass = find_dust_mass(
-        stellar_mass
-    )  # NOTE: This could be incorrect. Disk mass may be more appropriate.
+    dust_mass = find_dust_mass(stellar_mass)
     return dust_mass / disk_volume
