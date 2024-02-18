@@ -17,6 +17,7 @@ def get_stellar_mass_array() -> np.ndarray:
     # print(f"Calling quantile function {runs:,} times...")
     # u: np.ndarray = np.random.uniform(0, 1, runs)
     # return np.vectorize(quantile_func)(u)
+    print("Calculating stellar masses...")
     return np.array(get_stellar_masses(), dtype=float)
 
 
