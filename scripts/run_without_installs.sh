@@ -5,4 +5,4 @@ maturin develop --release
 # cd out of rust
 cd ..
 # Run the project
-python python/run.py
+python3 python/run.py
