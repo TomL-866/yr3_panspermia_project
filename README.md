@@ -37,7 +37,7 @@ to run the program from complete scratch (including every install except from Py
 .\scripts\run_without_installs.ps1
 ```
 
-to run the program once everything's installed.
+if you want to run the program again once everything's installed.
 
 ## Run from scripts (Linux)
 
@@ -53,7 +53,7 @@ to run the program from complete scratch (including every install except install
 source scripts/run_without_installs.sh
 ```
 
-to run the program once everything's installed.
+if you want to run the program again once everything's installed.
 
 ## Run manually (Linux - Ubuntu)
 
