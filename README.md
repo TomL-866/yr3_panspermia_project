@@ -76,5 +76,5 @@ cd ..
 Run the program by running the following command in the terminal:
 
 ```bash
-python3 run.py
+python3 python/run.py
 ```

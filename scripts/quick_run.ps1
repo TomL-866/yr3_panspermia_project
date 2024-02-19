@@ -5,4 +5,4 @@ maturin develop
 # cd out of rust
 Set-Location ..
 # Run the project
-python run.py
+python python/run.py

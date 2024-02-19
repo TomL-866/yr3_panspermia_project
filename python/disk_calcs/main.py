@@ -1,5 +1,5 @@
 import numpy as np
-from python.disk_calcs.disk import Disk
+from disk_calcs.disk import Disk
 
 
 def main(stellar_mass_arr: np.ndarray) -> None:

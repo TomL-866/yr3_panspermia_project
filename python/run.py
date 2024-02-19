@@ -1,7 +1,7 @@
-import python.IMF.main as imf
-import python.disk_calcs.main as disk
+import IMF.main as imf
+import disk_calcs.main as disk
 import time
-from python.IMF.main import get_stellar_mass_array
+from IMF.main import get_stellar_mass_array
 
 
 if __name__ == "__main__":

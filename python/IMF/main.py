@@ -1,9 +1,9 @@
 import numpy as np
 
 from rust import get_stellar_masses
-from python.IMF.plot_and_save import plot_imf_histogram, save_imf_values
+from IMF.plot_and_save import plot_imf_histogram, save_imf_values
 
-# from python.IMF.quantile_func import quantile_func  # Only uncomment if rust package is not working
+# from IMF.quantile_func import quantile_func  # Only uncomment if rust package is not working
 
 
 def get_stellar_mass_array() -> np.ndarray:
