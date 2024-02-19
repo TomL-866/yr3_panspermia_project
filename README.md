@@ -28,13 +28,13 @@ Then follow the instructions below to run the project.
 Run 
     
 ```powershell
-.\run_with_installs.ps1
+.\scripts\run_with_installs.ps1
 ```
 
 to run the program from complete scratch (including every install except from Python or Rust). Then run
 
 ```powershell
-.\run_without_installs.ps1
+.\scripts\run_without_installs.ps1
 ```
 
 to run the program once everything's installed.
@@ -44,13 +44,13 @@ to run the program once everything's installed.
 Run 
 
 ```bash
-source run_with_installs.sh
+source scripts/run_with_installs.sh
 ```
 
 to run the program from complete scratch (including every install except installing Python or Rust or installing python3-venv). Then run
 
 ```bash
-source run_without_installs.sh
+source scripts/run_without_installs.sh
 ```
 
 to run the program once everything's installed.
