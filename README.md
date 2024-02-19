@@ -17,7 +17,7 @@ language such as C or Fortran).
 
 # Running the project 
 
-This tutorial gives commands for running the project on Linux or in the bash or powershell terminal respectively. 
+This tutorial gives commands for running the project on Linux or Windows in the bash or powershell terminal respectively. 
 
 Before doing anything else, download (if you do not have these already) the Rust compiler (see <https://www.rust-lang.org/tools/install>) and a Python 3 interpreter (see <https://www.python.org/downloads/>).
 
@@ -55,7 +55,7 @@ source run_without_installs.sh
 
 to run the program once everything's installed.
 
-## Run manually (Linux)
+## Run manually (Linux - Ubuntu)
 
 Create a virtual environment and install the required Python packages by running the following commands in the terminal. You will need to have the `venv` module installed in your Python distribution. If you do not have it, you can install it by running `sudo apt-get install python3-venv` in the terminal. Then run the following commands in the terminal to create the virtual environment and install the required packages:
 
