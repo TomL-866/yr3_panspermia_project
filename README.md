@@ -15,7 +15,26 @@ that could survive the harsh environs of interstellar space. The project
 requires some prior knowledge/experience of coding (Python, or a compiled
 language such as C or Fortran).
 
-# Running the project
+# Running the project (Linux)
+
+## Run from scripts (Linux)
+
+Alternatively, run
+
+```bash
+source run_with_installs.sh
+```
+
+to run the program from complete scratch (including every install except installing Python or Rust or installing python3-venv), or run
+
+```bash
+source run_without_installs.sh
+```
+
+to run the program once everything's installed.
+
+## Run manually
+
 This tutorial gives commands for running the project on Linux in the bash terminal. 
 
 1. Download (if you do not have these already) the Rust compiler (see <https://www.rust-lang.org/tools/install>) and a Python 3 interpreter (see <https://www.python.org/downloads/>).
@@ -41,17 +60,3 @@ cd ..
 ```bash
 python3 run.py
 ```
-
-Alternatively, run
-
-```bash
-source run_with_installs.sh
-```
-
-to run the program from complete scratch (including every install except installing Python or Rust or installing python3-venv), or run
-
-```bash
-source run_without_installs.sh
-```
-
-to run the program once everything's installed.
