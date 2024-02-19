@@ -15,9 +15,9 @@ that could survive the harsh environs of interstellar space. The project
 requires some prior knowledge/experience of coding (Python, or a compiled
 language such as C or Fortran).
 
-# Running the project 
+# Running the project
 
-This tutorial gives commands for running the project on Linux or Windows in the bash or powershell terminal respectively. 
+This tutorial gives commands for running the project on Linux or Windows in the bash or powershell terminal respectively.
 
 Before doing anything else, download (if you do not have these already) the Rust compiler (see <https://www.rust-lang.org/tools/install>) and a Python 3 interpreter (see <https://www.python.org/downloads/>).
 
@@ -25,8 +25,8 @@ Then follow the instructions below to run the project.
 
 ## Run from scripts (Windows)
 
-Run 
-    
+Run
+
 ```powershell
 .\scripts\run_with_installs.ps1
 ```
@@ -41,7 +41,7 @@ if you want to run the program again once everything's installed.
 
 ## Run from scripts (Linux)
 
-Run 
+Run
 
 ```bash
 source scripts/run_with_installs.sh
