@@ -29,7 +29,7 @@ fn get_stellar_masses() -> Vec<f64> {
 }
 
 #[pymodule]
-fn rust(py: Python, m: &PyModule) -> PyResult<()> {
+fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(get_stellar_masses, m)?)?;
     Ok(())
 }
