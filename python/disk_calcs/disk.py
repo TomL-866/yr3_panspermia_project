@@ -73,10 +73,13 @@ class Disk:
         disk_density = np.sort(disk_density)  # SI units
 
         plt.plot(disk_density * 1000 / 100**3, dust_mass / astro_const.M_sun.value)
-        plt.ylabel("Dust Mass ($M_\\odot$)")
+        plt.ylabel("Dust Mass (M$_\\odot$)")
         plt.xlabel("Disk Density (g/cm$^3$)")
         plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.png")
         plt.close()
+
+    def find_dust_radius(self, disk_radius: float) -> float:
+        return 0.1 * disk_radius
 
     def run(self, stellar_mass_arr: np.ndarray) -> None:
         # All values in the following arrays are in SI units and
@@ -84,12 +87,23 @@ class Disk:
         radius_arr: np.ndarray = np.vectorize(self.find_radius)(
             stellar_mass_arr
         )  # Disk radius
+        # dust_radius_arr: np.ndarray = np.vectorize(self.find_dust_radius)(
+        #     radius_arr
+        # )  # Dust radius
+
         volume_arr: np.ndarray = np.vectorize(self.find_volume)(
             radius_arr
         )  # Disk volume
+        # dust_volume_arr: np.ndarray = np.vectorize(self.find_volume)(
+        #     dust_radius_arr
+        # )  # Dust volume
+
         density_arr: np.ndarray = np.vectorize(self.find_density)(
             volume_arr, stellar_mass_arr
         )  # Disk density
+        # dust_density_arr: np.ndarray = np.vectorize(self.find_density)(
+        #     dust_volume_arr, stellar_mass_arr
+        # )  # Dust density
 
         self.plot_dust_mass_vs_disk_density(
             self.find_dust_mass(stellar_mass_arr), density_arr
