@@ -93,9 +93,6 @@ class Disk:
         plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.png")
         plt.close()
 
-    def find_dust_radius(self, disk_radius: float) -> float:
-        return 0.1 * disk_radius
-
     def run(self, stellar_mass_arr: np.ndarray) -> None:
         # All values in the following arrays are in SI units and
         # are for the disk around the star
