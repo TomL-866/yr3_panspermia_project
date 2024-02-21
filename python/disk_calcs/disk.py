@@ -22,6 +22,9 @@ class Disk:
         m_sun: float = 1.98840987e30  # SI units
         return 200 * au_to_m * (stellar_mass / m_sun) ** (0.3)
 
+    def reduce_radius(self, disk_radius: float) -> float:
+        return disk_radius / 10
+
     def find_volume(self, disk_radius: float) -> float:
         """Get disk volume from disk radius and height
 
@@ -31,8 +34,20 @@ class Disk:
             float: Volume of disk in SI units
         """
         au_to_m: float = 1.49597871e11
-        disk_height: float = 0.1 * au_to_m
+        disk_height: float = 0.1 * 1 * au_to_m
         return np.pi * disk_radius**2 * disk_height
+
+    def find_volume_slab_geometry(self, disk_radius: float) -> float:
+        """Get disk volume from disk radius and height using slab geometry
+
+        Args:
+            disk_radius (float): Radius of disk in SI units
+        Returns:
+            float: Volume of disk in SI units
+        """
+        au_to_m: float = 1.49597871e11
+        disk_height: float = 0.1 * 1 * au_to_m
+        return disk_radius * disk_height
 
     def find_mass(self, stellar_mass: float) -> float:
         """Get disk mass from stellar mass
@@ -87,23 +102,16 @@ class Disk:
         radius_arr: np.ndarray = np.vectorize(self.find_radius)(
             stellar_mass_arr
         )  # Disk radius
-        # dust_radius_arr: np.ndarray = np.vectorize(self.find_dust_radius)(
-        #     radius_arr
-        # )  # Dust radius
 
-        volume_arr: np.ndarray = np.vectorize(self.find_volume)(
-            radius_arr
+        reduced_radius_arr: np.ndarray = np.vectorize(self.reduce_radius)(radius_arr)
+
+        volume_arr: np.ndarray = np.vectorize(self.find_volume_slab_geometry)(
+            reduced_radius_arr
         )  # Disk volume
-        # dust_volume_arr: np.ndarray = np.vectorize(self.find_volume)(
-        #     dust_radius_arr
-        # )  # Dust volume
 
         density_arr: np.ndarray = np.vectorize(self.find_density)(
             volume_arr, stellar_mass_arr
         )  # Disk density
-        # dust_density_arr: np.ndarray = np.vectorize(self.find_density)(
-        #     dust_volume_arr, stellar_mass_arr
-        # )  # Dust density
 
         self.plot_dust_mass_vs_disk_density(
             self.find_dust_mass(stellar_mass_arr), density_arr
