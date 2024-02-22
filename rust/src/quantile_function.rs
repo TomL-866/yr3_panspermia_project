@@ -1,11 +1,10 @@
 /// This module contains functions representing equations in https://doi.org/10.1093/mnras/sts479
 
-const SOLAR_MASS: f64 = 1.98840987e30; // SI units
-const MU: f64 = 0.2 * SOLAR_MASS;
+const MU: f64 = 0.2; // Equation assumes we're working in solar masses
 const ALPHA: f64 = 2.3;
 const BETA: f64 = 1.4;
-const UPPER_MASS_LIMIT: f64 = 50.0 * SOLAR_MASS;
-const LOWER_MASS_LIMIT: f64 = 0.1 * SOLAR_MASS;
+const UPPER_MASS_LIMIT: f64 = 50.0; // Equation assumes we're working in solar masses
+const LOWER_MASS_LIMIT: f64 = 0.1; // Equation assumes we're working in solar masses
 
 /// This function replicates the quantile function,
 /// Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
@@ -16,7 +15,7 @@ const LOWER_MASS_LIMIT: f64 = 0.1 * SOLAR_MASS;
 ///   u: A f64 value, a random number between 0 and 1.
 ///
 /// Returns:
-///  f64: The stellar mass value associated with the given u value.
+///  f64: The stellar mass value associated with the given u value (in solar masses).
 ///
 pub fn quantile_func(u: f64) -> f64 {
     MU * ((u * (auxiliary_func(UPPER_MASS_LIMIT) - auxiliary_func(LOWER_MASS_LIMIT))
