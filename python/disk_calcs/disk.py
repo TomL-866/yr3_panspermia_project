@@ -8,8 +8,20 @@ class DiskCalcs:
     """This class is here to group together functions that calculate
     values for the disk around the star."""
 
-    def __init__(self):
-        pass
+    def __init__(self, stellar_mass: np.ndarray):
+        self.stellar_mass: np.ndarray = stellar_mass
+        self.radius: np.ndarray = np.vectorize(self.find_radius)(
+            stellar_mass
+        )  # Disk radius
+        self.reduced_radius: np.ndarray = np.vectorize(self.reduce_radius)(
+            self.radius
+        )  # Reduced disk radius
+        self.volume: np.ndarray = np.vectorize(self.find_volume_slab_geometry)(
+            self.reduced_radius
+        )  # Disk volume
+        self.density: np.ndarray = np.vectorize(self.find_density)(
+            self.volume, stellar_mass
+        )  # Disk density
 
     def find_radius(self, stellar_mass: float) -> float:
         """Get disk radius from stellar mass.
@@ -86,19 +98,7 @@ class DiskCalcs:
         plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.png")
         plt.close()
 
-    def run(self, stellar_mass: np.ndarray) -> None:
-        # All values in the following arrays are in SI units and
-        # are for the disk around the star
-        radius: np.ndarray = np.vectorize(self.find_radius)(stellar_mass)  # Disk radius
-
-        reduced_radius: np.ndarray = np.vectorize(self.reduce_radius)(radius)
-
-        volume: np.ndarray = np.vectorize(self.find_volume_slab_geometry)(
-            reduced_radius
-        )  # Disk volume
-
-        density: np.ndarray = np.vectorize(self.find_density)(
-            volume, stellar_mass
-        )  # Disk density
-
-        self.plot_dust_mass_vs_disk_density(self.find_dust_mass(stellar_mass), density)
+    def run(self) -> None:
+        self.plot_dust_mass_vs_disk_density(
+            self.find_dust_mass(self.stellar_mass), self.density
+        )
