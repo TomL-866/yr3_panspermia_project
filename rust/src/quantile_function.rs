@@ -9,7 +9,7 @@ const LOWER_MASS_LIMIT: f64 = 0.01; // Equation assumes we're working in solar m
 /// This function replicates the quantile function,
 /// Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
 /// Values of constants are taken directly from the paper,
-/// except from the upper and lower mass limits.
+/// even the upper and lower mass limits.
 ///
 /// Args:
 ///   u: A f64 value, a random number between 0 and 1.
