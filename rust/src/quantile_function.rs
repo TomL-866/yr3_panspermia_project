@@ -1,16 +1,16 @@
 /// This module contains functions representing equations in https://doi.org/10.1093/mnras/sts479
 
 const STELLAR_MASS: f64 = 1.98840987e30;
-const MU: f64 = 0.2 * STELLAR_MASS; 
+const MU: f64 = 0.2 * STELLAR_MASS;
 const ALPHA: f64 = 2.3;
 const BETA: f64 = 1.4;
-const UPPER_MASS_LIMIT: f64 = 150.0 * STELLAR_MASS; 
-const LOWER_MASS_LIMIT: f64 = 0.01 * STELLAR_MASS; 
+const UPPER_MASS_LIMIT: f64 = 50.0 * STELLAR_MASS;  // This value is the only one different from the paper
+const LOWER_MASS_LIMIT: f64 = 0.01 * STELLAR_MASS;
 
 /// This function replicates the quantile function,
 /// Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
 /// Values of constants are taken directly from the paper,
-/// even the upper and lower mass limits.
+/// except the upper mass limit.
 ///
 /// Args:
 ///   u: A f64 value, a random number between 0 and 1.
