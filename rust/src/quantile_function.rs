@@ -3,8 +3,8 @@
 const MU: f64 = 0.2; // Equation assumes we're working in solar masses
 const ALPHA: f64 = 2.3;
 const BETA: f64 = 1.4;
-const UPPER_MASS_LIMIT: f64 = 50.0; // Equation assumes we're working in solar masses
-const LOWER_MASS_LIMIT: f64 = 0.1; // Equation assumes we're working in solar masses
+const UPPER_MASS_LIMIT: f64 = 150.0; // Equation assumes we're working in solar masses
+const LOWER_MASS_LIMIT: f64 = 0.01; // Equation assumes we're working in solar masses
 
 /// This function replicates the quantile function,
 /// Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.

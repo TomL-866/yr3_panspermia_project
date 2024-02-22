@@ -82,6 +82,7 @@ class DiskCalcs:
         plt.plot(disk_density * 1000 / 100**3, dust_mass / astro_const.M_sun.value)
         plt.ylabel("Dust Mass (M$_\\odot$)")
         plt.xlabel("Disk Density (g/cm$^3$)")
+        plt.title("Dust Mass vs Disk Density for Slab Volume Geometry")
         plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.png")
         plt.close()
 
