@@ -7,7 +7,7 @@ use pyo3::prelude::*;
 use rand::{rngs::ThreadRng, Rng};
 
 const RUNS: usize = 1_000_000;
-const SOLAR_MASS: f64 = 1.98840987e30; // SI units
+// const SOLAR_MASS: f64 = 1.98840987e30; // SI units
 
 #[pyfunction]
 fn get_stellar_masses() -> Vec<f64> {
@@ -23,7 +23,7 @@ fn get_stellar_masses() -> Vec<f64> {
     let mut stellar_mass: Vec<f64> = vec![0.0; RUNS]; // initialize vector with size RUNS
 
     for i in 0..RUNS {
-        stellar_mass[i] = quantile_function::quantile_func(u[i]) * SOLAR_MASS;
+        stellar_mass[i] = quantile_function::quantile_func(u[i])
     } // Populate stellar_mass vector with values in SI units
 
     stellar_mass
