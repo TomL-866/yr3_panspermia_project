@@ -6,7 +6,12 @@ from helpers import get_base_dir
 
 class DiskCalcs:
     """This class is here to group together functions that calculate
-    values for the disk around the star."""
+    values for the disk around the star.
+
+    It takes in a stellar mass and calculates the radius, reduced radius,
+    volume, mass, dust mass, and density of the disk.
+
+    Run the run() method to plot dust mass vs disk density."""
 
     def __init__(self, stellar_mass: np.ndarray):
         self.stellar_mass: np.ndarray = stellar_mass
