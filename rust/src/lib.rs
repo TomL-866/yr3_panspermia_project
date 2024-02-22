@@ -7,7 +7,6 @@ use pyo3::prelude::*;
 use rand::{rngs::ThreadRng, Rng};
 
 const RUNS: usize = 1_000_000;
-// const SOLAR_MASS: f64 = 1.98840987e30; // SI units
 
 #[pyfunction]
 fn get_stellar_masses() -> Vec<f64> {
