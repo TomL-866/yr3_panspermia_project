@@ -14,21 +14,20 @@ class DiskCalcs:
     Run the run() method to plot dust mass vs disk density."""
 
     def __init__(self, stellar_mass: np.ndarray):
+        print("Calculating disk values...")
         self.stellar_mass: np.ndarray = stellar_mass
-        self.radius: np.ndarray = np.vectorize(self.find_radius)(
-            stellar_mass
-        )  # Disk radius
-        self.reduced_radius: np.ndarray = np.vectorize(self.reduce_radius)(
+        self.radius: np.ndarray = self.find_radius(stellar_mass)  # Disk radius
+        self.reduced_radius: np.ndarray = self.reduce_radius(
             self.radius
         )  # Reduced disk radius
-        self.volume: np.ndarray = np.vectorize(self.find_volume_slab_geometry)(
+        self.volume: np.ndarray = self.find_volume_slab_geometry(
             self.reduced_radius
         )  # Disk volume
-        self.density: np.ndarray = np.vectorize(self.find_density)(
+        self.density: np.ndarray = self.find_density(
             self.volume, stellar_mass
         )  # Disk density
 
-    def find_radius(self, stellar_mass: float) -> float:
+    def find_radius(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk radius from stellar mass.
         This function is based on Equation 13
         from https://doi.org/10.1093/mnras/stac1513
@@ -42,10 +41,10 @@ class DiskCalcs:
         m_sun: float = 1.98840987e30  # SI units
         return 200 * au_to_m * (stellar_mass / m_sun) ** (0.3)
 
-    def reduce_radius(self, disk_radius: float) -> float:
+    def reduce_radius(self, disk_radius: np.ndarray) -> np.ndarray:
         return disk_radius / 10
 
-    def find_volume_slab_geometry(self, disk_radius: float) -> float:
+    def find_volume_slab_geometry(self, disk_radius: np.ndarray) -> np.ndarray:
         """Get disk volume from disk radius and height using slab geometry
 
         Args:
@@ -57,7 +56,7 @@ class DiskCalcs:
         disk_height: float = 0.1 * 1 * au_to_m
         return disk_radius * disk_height
 
-    def find_mass(self, stellar_mass: float) -> float:
+    def find_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk mass from stellar mass
 
         Args:
@@ -67,7 +66,7 @@ class DiskCalcs:
         """
         return 0.1 * stellar_mass
 
-    def find_dust_mass(self, stellar_mass: float) -> float:
+    def find_dust_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get dust mass from stellar mass
 
         Args:
@@ -77,7 +76,9 @@ class DiskCalcs:
         """
         return 0.01 * self.find_mass(stellar_mass)
 
-    def find_density(self, disk_volume: float, stellar_mass: float) -> float:
+    def find_density(
+        self, disk_volume: np.ndarray, stellar_mass: np.ndarray
+    ) -> np.ndarray:
         """Get disk density from disk volume and stellar mass
 
         Args:
@@ -92,6 +93,7 @@ class DiskCalcs:
     def plot_dust_mass_vs_disk_density(
         self, dust_mass: np.ndarray, disk_density: np.ndarray
     ) -> None:
+        print("Plotting dust mass vs disk density...")
         dust_mass = np.sort(dust_mass)  # SI units
         disk_density = np.sort(disk_density)  # SI units
 
