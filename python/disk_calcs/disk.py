@@ -54,7 +54,7 @@ class DiskCalcs:
         """
         au_to_m: float = 1.49597871e11
         disk_height: float = 0.1 * 1 * au_to_m
-        return disk_radius * disk_height  # NOTE: Need to justify this!
+        return disk_radius * disk_height * 2 * np.pi * disk_radius  # From meeting. If this returns low densities, got to reduce the radius a lot more. Assume dust tightly packed in the central plane of disk
 
     def find_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk mass from stellar mass
@@ -88,7 +88,7 @@ class DiskCalcs:
             float: Density of disk in SI units
         """
         dust_mass = self.find_dust_mass(stellar_mass)
-        return dust_mass / disk_volume
+        return dust_mass / disk_volume # Expecting this to be 1 g/cm^3. TODO: Return in 4 different units: solar masses au^-3, kg m^-3, g cm^-3, solar masses pc^-3.
 
     def plot_dust_mass_vs_disk_density(
         self, dust_mass: np.ndarray, disk_density: np.ndarray
