@@ -19,7 +19,7 @@ class DiskCalcs:
         self.radius: np.ndarray = self.find_radius(stellar_mass)  # Disk radius
         self.reduced_radius: np.ndarray = self.reduce_radius(
             self.radius
-        )  # Reduced disk radius
+        )  # Reduced disk radius - NOTE: Need to justify this!
         self.volume: np.ndarray = self.find_volume_slab_geometry(
             self.reduced_radius
         )  # Disk volume
@@ -54,7 +54,7 @@ class DiskCalcs:
         """
         au_to_m: float = 1.49597871e11
         disk_height: float = 0.1 * 1 * au_to_m
-        return disk_radius * disk_height
+        return disk_radius * disk_height  # NOTE: Need to justify this!
 
     def find_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk mass from stellar mass
