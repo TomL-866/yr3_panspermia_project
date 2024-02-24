@@ -1,5 +1,6 @@
 import IMF.main as imf
 import disk_calcs.main as disk
+import interaction_times.main as interaction_times
 import time
 from IMF.main import get_stellar_mass_array
 
@@ -14,4 +15,7 @@ if __name__ == "__main__":
     imf.main(stellar_mass_arr)
     disk.main(stellar_mass_arr)
 
-    print(f"Time taken: {time.perf_counter() - start} seconds")
+    # Get collision time for 'Oumuamua-like object with Earth
+    interaction_times.main()
+
+    print(f"Program took {time.perf_counter() - start} s to run")
