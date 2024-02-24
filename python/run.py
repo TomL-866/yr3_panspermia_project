@@ -8,6 +8,7 @@ from IMF.main import get_stellar_mass_array
 if __name__ == "__main__":
     start = time.perf_counter()
 
+    print("\n---PROGRAM START---")
     # Call get_stellar_mass_array() once
     stellar_mass_arr = get_stellar_mass_array()
 
@@ -19,3 +20,4 @@ if __name__ == "__main__":
     interaction_times.main()
 
     print(f"Program took {time.perf_counter() - start} s to run")
+    print("---PROGRAM END---\n")
