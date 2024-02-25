@@ -11,12 +11,11 @@ if __name__ == "__main__":
     # matplotlib.use("pgf")
     # matplotlib.rcParams.update(
     #     {
-    #         "pgf.texsystem": "xelatex",  # Or "lualatex"
+    #         "pgf.texsystem": "pdflatex",
     #         "font.family": "serif",
-    #         "font.serif": [],  # Avoid redundancy
+    #         "font.serif": ["Times New Roman", "CMU Serif"],  #  Fallback to CMU Serif
     #         "text.usetex": True,
-    #         "pgf.rcfonts": False,
-    #         "pgf.preamble": r"\usepackage{fontspec}\setmainfont{Times New Roman}",
+    #         "pgf.rcfonts": False
     #     }
     # )
 
