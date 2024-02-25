@@ -8,16 +8,16 @@ from IMF.main import get_stellar_mass_array
 
 if __name__ == "__main__":
     # PGF plot settings for exporting plots to LaTeX
-    matplotlib.use("pgf")
-    matplotlib.rcParams.update(
-        {
-            "pgf.texsystem": "pdflatex",
-            "font.family": "serif",
-            "font.serif": ["Times New Roman"],
-            "text.usetex": True,
-            "pgf.rcfonts": False,
-        }
-    )
+    # matplotlib.use("pgf")
+    # matplotlib.rcParams.update(
+    #     {
+    #         "pgf.texsystem": "pdflatex",
+    #         "font.family": "serif",
+    #         "font.serif": ["Times New Roman"],
+    #         "text.usetex": True,
+    #         "pgf.rcfonts": False,
+    #     }
+    # )
 
     start = time.perf_counter()
 
