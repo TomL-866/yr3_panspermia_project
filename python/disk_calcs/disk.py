@@ -122,6 +122,7 @@ class DiskCalcs:
         plt.xlabel("Disk Density (g/cm$^3$)")
         plt.title("Dust Mass vs Disk Density for Slab Volume Geometry")
         plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.png")
+        # plt.savefig(f"{get_base_dir()}/output/graphs/dust_mass_vs_disk_density.pgf")
         plt.close()
 
     def save_disk_density(self, disk_density: np.ndarray) -> None:

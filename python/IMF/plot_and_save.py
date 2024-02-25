@@ -26,6 +26,7 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
     plt.ylabel("Frequency")
     plt.title("Initial Mass Function (IMF) Histogram")
     plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.png")
+    # plt.savefig(get_base_dir() + "/output/graphs/imf_histogram.pgf")
     plt.close()
 
 

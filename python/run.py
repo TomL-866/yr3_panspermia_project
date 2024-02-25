@@ -1,3 +1,4 @@
+import matplotlib
 import IMF.main as imf
 import disk_calcs.main as disk
 import interaction_times.main as interaction_times
@@ -6,6 +7,18 @@ from IMF.main import get_stellar_mass_array
 
 
 if __name__ == "__main__":
+    # PGF plot settings for exporting plots to LaTeX
+    matplotlib.use("pgf")
+    matplotlib.rcParams.update(
+        {
+            "pgf.texsystem": "pdflatex",
+            "font.family": "serif",
+            "font.serif": ["Times New Roman"],
+            "text.usetex": True,
+            "pgf.rcfonts": False,
+        }
+    )
+
     start = time.perf_counter()
 
     print("\n---PROGRAM START---")
