@@ -9,11 +9,12 @@ if __name__ == "__main__":
     start = time.perf_counter()
 
     print("\n---PROGRAM START---")
-    # Call get_stellar_mass_array() once
     stellar_mass_arr = get_stellar_mass_array()
 
-    # Pass the array to the functions that need it
+    # Calculate and plot initial mass function
     imf.main(stellar_mass_arr)
+
+    # Calculate disk values and plot dust mass vs disk density
     disk.main(stellar_mass_arr)
 
     # Get collision time for 'Oumuamua-like object with Earth
