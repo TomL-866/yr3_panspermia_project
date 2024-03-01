@@ -26,6 +26,24 @@ class DiskCalcs:
         self.density: np.ndarray = self.find_density(
             self.volume, stellar_mass
         )  # Disk density
+        self.csa_sideview = self.find_csa_sideview(
+            self.radius
+        )  # Cross sectional area of disk from side view
+        self.csa_topview = self.find_csa_topview(
+            self.radius
+        )  # Cross sectional area of disk from top view
+
+    def get_radius(self) -> np.ndarray:
+        return self.radius
+
+    def get_mass(self) -> np.ndarray:
+        return self.find_mass(self.stellar_mass)
+
+    def get_csa_sideview(self) -> np.ndarray:
+        return self.csa_sideview
+
+    def get_csa_topview(self) -> np.ndarray:
+        return self.csa_topview
 
     def find_radius(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk radius from stellar mass.
@@ -33,9 +51,9 @@ class DiskCalcs:
         from https://doi.org/10.1093/mnras/stac1513
 
         Args:
-            stellar_mass (float): Stellar mass in SI units
+            stellar_mass (np.ndarray): Stellar mass in SI units
         Returns:
-            float: Radius of disk in SI units
+            np.ndarray: Radius of disk in SI units
         """
         au_to_m: float = astro_const.au.value
         m_sun: float = astro_const.M_sun.value
@@ -49,22 +67,44 @@ class DiskCalcs:
         """Get disk volume from disk radius and height using slab geometry
 
         Args:
-            disk_radius (float): Radius of disk in SI units
+            disk_radius (np.ndarray): Radius of disk in SI units
         Returns:
-            float: Volume of disk in SI units
+            np.ndarray: Volume of disk in SI units
         """
         au_to_m: float = astro_const.au.value
         disk_height: float = 0.1 * 1 * au_to_m
         circumference: float = 2 * np.pi * disk_radius
         return disk_radius * disk_height * circumference
 
+    def find_csa_sideview(self, disk_radius: np.ndarray) -> np.ndarray:
+        """Get cross sectional area of disk from disk radius
+
+        Args:
+            disk_radius (np.ndarray): Radius of disk in SI units
+        Returns:
+            np.ndarray: Cross sectional area of disk in SI units
+        """
+        au_to_m: float = astro_const.au.value
+        disk_height: float = 0.1 * au_to_m
+        return disk_radius * disk_height
+
+    def find_csa_topview(self, disk_radius: np.ndarray) -> np.ndarray:
+        """Get cross sectional area of disk from disk radius
+
+        Args:
+            disk_radius (np.ndarray): Radius of disk in SI units
+        Returns:
+            np.ndarray: Cross sectional area of disk in SI units
+        """
+        return np.pi * disk_radius**2
+
     def find_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
         """Get disk mass from stellar mass
 
         Args:
-            stellar_mass (float): Stellar mass in SI units
+            stellar_mass (np.ndarray): Stellar mass in SI units
         Returns:
-            float: Mass of disk in SI units
+            np.ndarray: Mass of disk in SI units
         """
         return 0.1 * stellar_mass
 
@@ -72,9 +112,9 @@ class DiskCalcs:
         """Get dust mass from stellar mass
 
         Args:
-            stellar_mass (float): Stellar mass in SI units
+            stellar_mass (np.ndarray): Stellar mass in SI units
         Returns:
-            float: Mass of dust in disk in SI units
+            np.ndarray: Mass of dust in disk in SI units
         """
         return 0.01 * self.find_mass(stellar_mass)
 
@@ -84,31 +124,15 @@ class DiskCalcs:
         """Get disk density from disk volume and stellar mass
 
         Args:
-            disk_volume (float): Volume of disk in SI units
-            stellar_mass (float): Stellar mass in SI units
+            disk_volume (np.ndarray): Volume of disk in SI units
+            stellar_mass (np.ndarray): Stellar mass in SI units
         Returns:
-            float: Density of disk in SI units
+            np.ndarray: Density of disk in SI units
         """
         dust_mass = self.find_dust_mass(stellar_mass)
         return (
             dust_mass / disk_volume
         )  # Expecting this to be 1 g/cm^3. If not, need to reduce the radius a lot more. Assume dust tightly packed in the central plane of disk
-
-    def si_to_msun_au3(self, disk_density: np.ndarray) -> np.ndarray:
-        """Converts density from SI (kg/m^3) to Msun/AU^3"""
-        au_to_m: float = astro_const.au.value
-        m_sun: float = astro_const.M_sun.value
-        return disk_density * (au_to_m**3) / m_sun
-
-    def si_to_msun_pc3(self, disk_density: np.ndarray) -> np.ndarray:
-        """Converts density from SI (kg/m^3) to Msun/pc^3"""
-        pc_to_m: float = astro_const.pc.value
-        m_sun: float = astro_const.M_sun.value
-        return disk_density * (pc_to_m**3) / m_sun
-
-    def si_to_g_cm3(self, disk_density: np.ndarray) -> np.ndarray:
-        """Converts density from SI (kg/m^3) to g/cm^3"""
-        return disk_density / 1000
 
     def plot_dust_mass_vs_disk_density(
         self, dust_mass: np.ndarray, disk_density: np.ndarray

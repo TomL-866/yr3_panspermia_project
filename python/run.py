@@ -31,7 +31,7 @@ if __name__ == "__main__":
     disk.main(stellar_mass_arr)
 
     # Get collision time for 'Oumuamua-like object with Earth
-    interaction_times.main()
+    interaction_times.main(stellar_mass_arr)
 
     print(f"Program took {time.perf_counter() - start} s to run")
     print("---PROGRAM END---\n")
