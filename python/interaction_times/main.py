@@ -21,8 +21,10 @@ def main() -> None:
     collision_time = t_coll(n_o, v_o)
 
     print(
-        f"Time for collision: {collision_time / (days_in_a_year * 24 * 60 * 60 * 1e6)} Myr"
+        f"Time for collision between 'Oumuamua and Earth: {collision_time / (days_in_a_year * 24 * 60 * 60 * 1e6)} Myr"
     )
 
     # Write the collision time to file
-    np.save(f"{get_base_dir()}/output/values/collision_time.npy", collision_time)
+    np.save(
+        f"{get_base_dir()}/output/values/collision_time_w_earth.npy", collision_time
+    )
