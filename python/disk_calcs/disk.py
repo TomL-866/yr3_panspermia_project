@@ -42,7 +42,8 @@ class DiskCalcs:
         return 200 * au_to_m * (stellar_mass / m_sun) ** (0.3)
 
     def reduce_radius(self, disk_radius: np.ndarray) -> np.ndarray:
-        return disk_radius / 1e7  # Reduced disk radius - NOTE: Need to justify this!
+        # TODO: This is known rubbish. We'll come back to it later
+        return disk_radius / 1e7
 
     def find_volume_slab_geometry(self, disk_radius: np.ndarray) -> np.ndarray:
         """Get disk volume from disk radius and height using slab geometry
