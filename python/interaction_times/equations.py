@@ -1,6 +1,7 @@
 import numpy as np
 import astropy.constants as astro_const
 from disk_calcs.disk import DiskCalcs
+from helpers import load_stellar_mass_file
 
 
 def t_coll_earth(n_o: float, v_o: float) -> float:
@@ -32,13 +33,20 @@ def t_coll_disk(n_o: float, v_o: float, csa: float, disk: DiskCalcs) -> float:
         csa (float): Cross sectional area of disk in SI units
         disk (DiskCalcs): Disk object
     """
-    r_disk: float = disk.get_radius()
-    m_disk: float = disk.get_mass()
 
-    v_esc: float = np.sqrt(
-        2 * astro_const.G.value * m_disk / r_disk
-    )  # TODO: FIX THIS TO A PROPER VALUE
-    print("!! NEED TO FIX V_ESC FOR DISK COLLISION TIME !!")
+    stellar_mass: float = load_stellar_mass_file()
+    stellar_radius: float = stellar_mass**0.8  # Mass-radius relation for MS stars
+
+    G: float = astro_const.G.value
+
+    v_esc_star: float = np.sqrt(2 * G * stellar_mass / stellar_radius)
+    v_esc = (
+        v_esc_star  # NOTE: Fix this to something more sensible - perhaps ask Richard
+    )
+    print("!! FIX V_ESC FOR DUST DISK !!")
+    # Possible ideas:
+    # https://www.sciencedirect.com/topics/earth-and-planetary-sciences/protoplanetary-disk
+
     C: float = csa * (1 + v_esc**2 / v_o**2)  # Collision cross section in SI units
 
     return 1 / (n_o * C * v_o)

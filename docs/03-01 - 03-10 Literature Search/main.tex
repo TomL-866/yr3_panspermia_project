@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage{natbib}
+\usepackage{parskip}
+
+\title{Literature Values Search}
+\author{Thomas Locks}
+
+\begin{document}
+\noindent
+\maketitle
+
+\section{Escape Velocity from Dust Disk}
+\citet{holland2014treatise}, in Section 6.1.2.2, gives an escape velocity in relation to a gravitational focusing factor. See Equation \ref{eq:grav_focusing}.
+
+\begin{equation}
+    F_g = 1 + \frac{v_{esc}^2}{v_{rel}^2}
+    \label{eq:grav_focusing}
+\end{equation}
+
+In Equation \ref{eq:grav_focusing}, $v_{esc}$ is the body's escape velocity, and $v_{rel}$ is the escape velocity of other particles in the body's environment.
+
+It is unclear whether this is the right approach. Can a dust disk be considered a `body' in this context?
+
+\section{Lifetime of Biological Material on Rocks in Space}
+% Assume that small rocks are much more common than larger rocks, and the largest rocks are no more massive than the Moon.
+\citet{ginsburg2018galactic} gives
+
+
+\begin{equation}
+    f_{survived} = e^{-\frac{t}{\tau_{bio}}}
+    \label{eq:survival_frac_to_lifetime}
+\end{equation}
+
+In Equation \ref{eq:survival_frac_to_lifetime}, $\tau_{bio}$ is the biological lifetime, and $t$ is the time the biological material spends inside the rock.
+
+
+We can take $t = \tau_{rock}$, assuming the time the biological material spends inside the rock is the same as the time the rock spends in space.
+
+
+\citet{mileikowsky2000risks} gives a survival fraction according to Equation \ref{eq:survival_frac}.
+
+\begin{equation}
+    f_{tot,S} = f_{1,S} f_{2,S} f_{3,S}(\tau_{rock}) f_{4,S}(\tau_{rock}) f_{5,S}(\tau_{rock}) f_{6,S}
+    \label{eq:survival_frac}
+\end{equation}
+
+In Equation \ref{eq:survival_frac}, $S$ represents the size group of the rock, and the subscript number represents the risk type with respect to the biological material in the rock.
+
+Substituting in the values from \citet{mileikowsky2000risks}, Equation \ref{eq:survival_frac_w_numbers}:
+
+\begin{equation}
+    f_{tot,S} = 0.5 \times 0.8 f_{3,S}(\tau_{rock}) f_{4,S}(\tau_{rock}) f_{5,S}(\tau_{rock}) \times 0.8,
+    \label{eq:survival_frac_w_numbers}
+\end{equation}
+
+where $f_{3, S} = f_{GCR + SR} = ...$ and $f_{5, S} = f_{nat \; rad} = ...$. `Galactic cosmic rays' is shortened to GCR; solar radiation is shortened to SR; and natural radiation is shortened to `nat rad'
+
+
+\subsection{Lifetime of These Rocks}
+% Rocks from M-dwarfs will have been around for longer (or conversely, rocks from G-stars will have been around for less time), because of the lifetime difference between these stars.
+
+
+
+% References
+\bibliographystyle{agsm}
+\bibliography{bibliography}
+
+\end{document}
