@@ -2,6 +2,7 @@
 
 \usepackage{natbib}
 \usepackage{parskip}
+\usepackage{url}
 
 \title{Literature Values Search}
 \author{Thomas Locks}
@@ -34,35 +35,35 @@ It is unclear whether this is the right approach. Can a dust disk be considered 
 
 In Equation \ref{eq:survival_frac_to_lifetime}, $\tau_{bio}$ is the biological lifetime, and $t$ is the time the biological material spends inside the rock.
 
-
-We can take $t = \tau_{rock}$, assuming the time the biological material spends inside the rock is the same as the time the rock spends in space.
-
-
-\citet{mileikowsky2000risks} gives a survival fraction according to Equation \ref{eq:survival_frac}.
+\citet{adams2022transfer} looks promising. It gives a distribution of rocky objects by mass:
 
 \begin{equation}
-    f_{tot,S} = f_{1,S} f_{2,S} f_{3,S}(\tau_{rock}) f_{4,S}(\tau_{rock}) f_{5,S}(\tau_{rock}) f_{6,S}
-    \label{eq:survival_frac}
+    \frac{dN}{dm} = Am^{-p}
+    \label{eq:rock_mass_dist}
 \end{equation}
 
-In Equation \ref{eq:survival_frac}, $S$ represents the size group of the rock, and the subscript number represents the risk type with respect to the biological material in the rock.
+In Equation \ref{eq:rock_mass_dist}, $m$ is the mass, $N$ is the number of rocks, and $p$ has values between 1 and 2. When the size-mass distribution is `determined by collisional processes', $p \approx 1.8$. This can be linked to rock radius if we have an assumed density for these rocks. $A$ is defined in \citet{adams2022transfer}.
 
-Substituting in the values from \citet{mileikowsky2000risks}, Equation \ref{eq:survival_frac_w_numbers}:
+\url{https://astrostatistics.psu.edu/datasets/asteroid_dens.html#:~:text=However%2C%20the%20internal%20structure%20of,structures%20will%20have%20lower%20density.} gives a density of asteroids ('Oumuamua is said to have the same density -- see the Wikipedia page) of 3--5 gcm$^{-3}$.
+
+\citet{adams2022transfer} gives a minimum mass for the rocks to harbour biological life as 10 kg. 
+
+\citet{adams2022transfer} also gives a minimum rock size for the rocks to harbour biological life as a few centimetres. 
+
+\citet{adams2022transfer} also gives a value for the fraction of remaining bodies as a function of time since capture:
 
 \begin{equation}
-    f_{tot,S} = 0.5 \times 0.8 f_{3,S}(\tau_{rock}) f_{4,S}(\tau_{rock}) f_{5,S}(\tau_{rock}) \times 0.8,
-    \label{eq:survival_frac_w_numbers}
+    f_{survived}(t) = \frac{1}{1 + (t/\tau)^{8/5}}
+    \label{eq:survival_frac_adams}
 \end{equation}
 
-where $f_{3, S} = f_{GCR + SR} = ...$ and $f_{5, S} = f_{nat \; rad} = ...$. `Galactic cosmic rays' is shortened to GCR; solar radiation is shortened to SR; and natural radiation is shortened to `nat rad'
-
+In Equation \ref{eq:survival_frac_adams}, $\tau = 0.84$ Myr; $t$ is the time since the capture of the object. This value is derived from a fit to experimental data. 
 
 \subsection{Lifetime of These Rocks}
+
 % Rocks from M-dwarfs will have been around for longer (or conversely, rocks from G-stars will have been around for less time), because of the lifetime difference between these stars.
 
 
-
-% References
 \bibliographystyle{agsm}
 \bibliography{bibliography}
 
