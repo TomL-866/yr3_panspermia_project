@@ -16,6 +16,7 @@ def calc_coll_time_earth() -> None:
     # See also https://doi.org/10.1051/0004-6361/202141283.
 
     # This is speed relative to the Sun.
+    # NOTE: https://www.nature.com/articles/s41550-019-0816-x gives a much more accurate value
     v_o: float = 26e3  # SI units
 
     days_in_a_year: float = (
