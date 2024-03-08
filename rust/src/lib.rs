@@ -12,11 +12,10 @@ const RUNS: usize = 1_000_000;
 #[pyfunction]
 pub fn get_stellar_masses() -> Vec<f64> {
     let mut rng: ThreadRng = rand::thread_rng(); // Quantile function takes in a random number from 0 to 1 (uniform distribution)
-    let mut stellar_mass: Vec<f64> = vec![0.0; RUNS];
 
-    for i in 0..RUNS {
-        stellar_mass[i] = quantile_function::quantile_func(rng.gen_range(0.0..1.0));
-    }
+    let stellar_mass: Vec<f64> = (0..RUNS)
+    .map(|_| quantile_function::quantile_func(rng.gen_range(0.0..1.0)))
+    .collect();
 
     stellar_mass // SI units
 }
@@ -24,11 +23,10 @@ pub fn get_stellar_masses() -> Vec<f64> {
 #[pyfunction]
 pub fn get_rock_masses() -> Vec<f64>{
     let mut rng: ThreadRng = rand::thread_rng(); 
-    let mut rock_mass: Vec<f64> = vec![0.0; RUNS];
 
-    for i in 0..RUNS {
-        rock_mass[i] = rock_dist::rock_dist(rng.gen_range(0.0..1.0));
-    }
+    let rock_mass: Vec<f64> = (0..RUNS)
+    .map(|_| rock_dist::rock_dist(rng.gen_range(0.0..1.0)))
+    .collect();
 
     println!("!! FIX ROCK MASS EQUATION !!");
     rock_mass // SI units
