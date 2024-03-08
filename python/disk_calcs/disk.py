@@ -151,7 +151,7 @@ class DiskCalcs:
         plt.close()
 
     def save_disk_density(self, disk_density: np.ndarray) -> None:
-        print("Saving disk density...")
+        print("Saving disk density values...")
         np.save(
             f"{get_base_dir()}/output/values/disk_density.npy",
             disk_density,

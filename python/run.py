@@ -25,15 +25,19 @@ if __name__ == "__main__":
     stellar_mass_arr = get_stellar_mass_array()
 
     # Calculate and plot initial mass function
+    print("")
     imf.main(stellar_mass_arr)
 
     # Calculate disk values and plot dust mass vs disk density
+    print("")
     disk.main(stellar_mass_arr)
 
     # Get collision time for 'Oumuamua-like object with Earth
+    print("")
     interaction_times.main(stellar_mass_arr)
 
     # Calculate and plot rock mass distribution
+    print("")
     rock_calcs.main()
 
     print(f"\nProgram took {time.perf_counter() - start} s to run")
