@@ -1,5 +1,5 @@
 import numpy as np
-from interaction_times.equations import t_coll_disk, t_coll_earth
+from interaction_times.collision_times import t_coll_disk, t_coll_earth
 from helpers import get_base_dir
 from disk_calcs.disk import DiskCalcs
 
