@@ -59,7 +59,7 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     )
 
     plt.yscale("log")
-    plt.xscale("log")
+    # plt.xscale("log")
     plt.xlabel("Rock radii (m)")
     plt.ylabel("Rock lifetime (Myr)")
     plt.title("Rock Lifetime vs Radius of rock")
