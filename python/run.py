@@ -33,6 +33,7 @@ if __name__ == "__main__":
     disk.main(stellar_mass_arr)
 
     # Get collision time for 'Oumuamua-like object with Earth
+    # and the dust disk
     print("")
     interaction_times.main(stellar_mass_arr)
 
