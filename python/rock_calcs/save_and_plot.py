@@ -47,15 +47,15 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     # rock_radii = rock_radii[::1000]
     # rock_lifetimes = rock_lifetimes[::1000]
 
-    # rock_lifetimes = np.sort(rock_lifetimes)
-    # rock_radii = np.sort(rock_radii)
+    rock_lifetimes = np.sort(rock_lifetimes)
+    rock_radii = np.sort(rock_radii)
 
     plt.figure()
     plt.plot(
         rock_radii,
         rock_lifetimes / (10**6 * days_in_a_year * 24 * 60 * 60),
-        "o",
-        markersize=1,
+        # "o",
+        # markersize=1,
     )
 
     plt.xlabel("Rock radii (m)")

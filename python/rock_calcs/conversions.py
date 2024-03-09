@@ -24,7 +24,7 @@ def rock_radius_to_lifetime(rock_radii: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: Rock lifetime in SI units
     """
-    t_myr = np.sqrt(10**13 / (rock_radii))
+    t_myr = 75 * rock_radii**2
 
     days_in_a_year: float = (
         365 + 0.25 - 0.01 + 0.0025 - 0.00025
