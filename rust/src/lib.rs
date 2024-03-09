@@ -28,7 +28,6 @@ pub fn get_rock_masses() -> Vec<f64> {
         .map(|_| rock_dist::rock_dist(rng.gen_range(0.0..1.0)))
         .collect();
 
-    println!("!! FIX ROCK MASS EQUATION !!");
     rock_mass // SI units
 }
 
