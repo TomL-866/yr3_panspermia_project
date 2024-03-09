@@ -15,13 +15,16 @@ def save_rock_dist(rock_masses: np.ndarray) -> None:
 
 def plot_rock_dist(rock_masses: np.ndarray) -> None:
     plt.figure()
-    bins: list[float] = list(np.logspace(np.log10(M_LOW), np.log10(M_UPP), num=75))
+    bins: list[float] = list(
+        np.logspace(np.log10(M_LOW / M_MOON), np.log10(M_UPP / M_MOON), num=250)
+    )
     plt.hist(
         rock_masses / M_MOON,
         bins=bins,
     )
     plt.yscale("log")
     plt.xscale("log")
+    plt.xlim(np.min((rock_masses / M_MOON)), 10**0)
     plt.xlabel("Rock mass (M$_{Moon}$)")
     plt.ylabel("Frequency")
     plt.title("Rock Mass Distribution")
