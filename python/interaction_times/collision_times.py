@@ -34,20 +34,17 @@ def t_coll_disk(n_o: float, v_o: float, csa: float, disk: DiskCalcs) -> np.ndarr
         disk (DiskCalcs): Disk object
 
     Returns:
-        np.ndarray: Collision times for 'Oumuamua for each disk 
+        np.ndarray: Collision times for 'Oumuamua for each disk
     """
 
     stellar_mass: np.ndarray = load_stellar_mass_file()
-    stellar_radius: np.ndarray = stellar_mass**0.8  # Mass-radius relation for MS stars
 
     disk_mass: np.ndarray = disk.get_mass()
     disk_radius: np.ndarray = disk.get_radius()
 
     G: float = astro_const.G.value
 
-    v_esc: float = np.sqrt(
-        2 * G * (stellar_mass + disk_mass) / (stellar_radius + disk_radius)
-    )
+    v_esc: float = np.sqrt(2 * G * (stellar_mass + disk_mass) / disk_radius)
 
     C: float = csa * (1 + v_esc**2 / v_o**2)  # Collision cross section in SI units
 
