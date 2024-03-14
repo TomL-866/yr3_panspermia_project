@@ -27,10 +27,10 @@ class DiskCalcs:
             self.volume, stellar_mass
         )  # Disk density
         self.csa_sideview = self.find_csa_sideview(
-            self.radius
+            self.reduced_radius
         )  # Cross sectional area of disk from side view
         self.csa_topview = self.find_csa_topview(
-            self.radius
+            self.reduced_radius
         )  # Cross sectional area of disk from top view
 
     def get_radius(self) -> np.ndarray:
