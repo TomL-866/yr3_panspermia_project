@@ -1,9 +1,9 @@
 import matplotlib
 import time
-import IMF.main as imf
+import imf.main as imf
 import disk_calcs.main as disk
 import interaction_times.main as interaction_times
-from IMF.main import get_stellar_mass_array
+from imf.main import get_stellar_mass_array
 import rock_calcs.main as rock_calcs
 
 if __name__ == "__main__":

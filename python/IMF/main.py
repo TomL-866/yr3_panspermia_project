@@ -1,7 +1,7 @@
 import numpy as np
 
 from rust import get_stellar_masses
-from IMF.plot_and_save import plot_imf_histogram, save_imf_values
+from imf.plot_and_save import plot_imf_histogram, save_imf_values
 
 
 def get_stellar_mass_array() -> np.ndarray:
