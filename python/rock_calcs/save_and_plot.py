@@ -50,10 +50,15 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     rock_lifetimes = np.sort(rock_lifetimes)
     rock_radii = np.sort(rock_radii)
 
+    moon_radius: float = 1737.4 * 10**3
+    # find radius where mass of rock is equal to mass of moon
+    max_radius: float = (3 / (4 * np.pi)) ** (1 / 3) * moon_radius
+    mask = rock_radii < max_radius
+
     plt.figure()
     plt.plot(
-        rock_radii,
-        rock_lifetimes / (10**6 * days_in_a_year * 24 * 60 * 60),
+        rock_radii[mask],
+        rock_lifetimes[mask] / (10**6 * days_in_a_year * 24 * 60 * 60),
         # "o",
         # markersize=1,
     )
