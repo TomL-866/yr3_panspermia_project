@@ -50,7 +50,6 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     rock_lifetimes = np.sort(rock_lifetimes)
     rock_radii = np.sort(rock_radii)
 
-    moon_radius: float = 1737.4 * 10**3
     # find radius where mass of rock is equal to mass of moon
     max_radius: float = np.max(
         rock_radii[np.where(4 / 3 * np.pi * rock_radii**3 * 4 * 1e3 <= M_MOON)]
