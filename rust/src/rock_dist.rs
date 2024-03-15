@@ -13,9 +13,5 @@ const M_EARTH: f64 = 5.97216787e24;
 /// Returns:
 ///   f64: Rock mass in kg
 pub fn rock_dist(u: f64) -> f64 {
-    let m_r = M_EARTH; // m_R in Adams and Napier 2022
-    let m_2 = M_UPP;
-    let a = (2.0 - P) * m_r / m_2.powf(2.0 - P); // A in Adams and Napier 2022
-
-    a * (u * M_UPP.powf(1.0 - P) + (1.0 - u) * M_LOW.powf(1.0 - P)).powf(1.0 / (1.0 - P))
+    (u * M_UPP.powf(1.0 - P) + (1.0 - u) * M_LOW.powf(1.0 - P)).powf(1.0 / (1.0 - P))
 }

@@ -34,7 +34,7 @@ def plot_rock_dist(rock_masses: np.ndarray) -> None:
     )
     plt.yscale("log")
     plt.xscale("log")
-    plt.xlim(np.min((rock_masses / M_MOON)), 10**0)
+    plt.xlim(np.min(rock_masses) / M_MOON, 10**0)
     plt.xlabel("Rock mass (M$_{Moon}$)")
     plt.ylabel("Frequency")
     plt.title("Rock Mass Distribution")
