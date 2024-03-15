@@ -26,7 +26,7 @@ def t_coll_earth(n_o: float, v_o: float) -> float:
 
 def t_coll_disk(
     n_o: float, v_o: float, disk: DiskCalcs
-) -> tuple(np.ndarray, np.ndarray):
+) -> tuple[np.ndarray, np.ndarray]:
     """Finds collision time of 'Oumuamua-like object with a disk
     for both side and top cross sectional areas
 

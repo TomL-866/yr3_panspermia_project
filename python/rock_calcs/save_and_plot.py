@@ -6,6 +6,7 @@ from helpers import get_base_dir
 M_MOON = 7.34767309e22
 M_LOW = 10
 M_UPP = M_MOON
+R_MOON = 1.7371e6
 
 
 def save_rock_dist(rock_masses: np.ndarray) -> None:
@@ -25,17 +26,15 @@ def plot_rock_dist(rock_masses: np.ndarray) -> None:
         rock_masses (np.ndarray): Rock masses array
     """
     plt.figure()
-    bins: list[float] = list(
-        np.logspace(np.log10(M_LOW / M_MOON), np.log10(M_UPP / M_MOON), num=500)
-    )
+    bins: list[float] = list(np.logspace(np.log10(M_LOW), np.log10(M_UPP), num=75))
     plt.hist(
-        rock_masses / M_MOON,
+        rock_masses,  # / M_MOON,
         bins=bins,
     )
     plt.yscale("log")
     plt.xscale("log")
-    plt.xlim(np.min(rock_masses) / M_MOON, 10**0)
-    plt.xlabel("Rock mass (M$_{Moon}$)")
+    plt.xlim(M_LOW, M_UPP)
+    plt.xlabel("Rock mass (kg)")
     plt.ylabel("Frequency")
     plt.title("Rock Mass Distribution")
     plt.savefig(get_base_dir() + "/output/graphs/rock_mass_histogram.png")
@@ -66,13 +65,8 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
         rock_lifetimes
     )  # Need to sort so matplotlib plots in order
     rock_radii = np.sort(rock_radii)
-    rock_density: float = 4 * 1e3  # SI
 
-    # find radius where mass of rock is equal to mass of moon
-    max_radius: float = np.max(
-        rock_radii[np.where(4 / 3 * np.pi * rock_radii**3 * rock_density <= M_MOON)]
-    )
-    mask = rock_radii < max_radius
+    mask = np.where(rock_radii <= R_MOON)  # densities are very similar
 
     plt.figure()
     plt.plot(

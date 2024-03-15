@@ -58,7 +58,7 @@ class DiskCalcs:
 
     def reduce_radius(self, disk_radius: np.ndarray) -> np.ndarray:
         # TODO: This is known rubbish. We'll come back to it later
-        return disk_radius / 1e7
+        return disk_radius / 1
 
     def find_volume_slab_geometry(self, disk_radius: np.ndarray) -> np.ndarray:
         au_to_m: float = astro_const.au.value
