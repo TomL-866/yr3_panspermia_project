@@ -2,12 +2,13 @@ import numpy as np
 
 
 def rock_mass_to_radius(rock_masses: np.ndarray) -> np.ndarray:
-    """Convert rock mass to radius
+    """Converts rock masses to radii using rock density.
 
     Args:
-        rock_masses (np.ndarray): Rock masses in SI units
+        rock_masses (np.ndarray): Rock mass array
+
     Returns:
-        np.ndarray: Rock radii in SI units
+        np.ndarray: Rock radii array
     """
     rock_density_cgs = 4  # g/cm^3
     rock_density = rock_density_cgs * 10 ** (-3) * 1 / (10 ** (-6))
@@ -16,13 +17,14 @@ def rock_mass_to_radius(rock_masses: np.ndarray) -> np.ndarray:
 
 
 def rock_radius_to_lifetime(rock_radii: np.ndarray) -> np.ndarray:
-    """Convert rock radius to lifetime
+    """Converts rock radius to lifetime using the formula t = 75 * r^2.
+    This comes from https://doi.org/10.1088/0004-637X/690/1/210.
 
     Args:
-        rock_radii (np.ndarray): Rock radii in SI units
+        rock_radii (np.ndarray): Rock radii array
 
     Returns:
-        np.ndarray: Rock lifetime in SI units
+        np.ndarray: Rock lifetime array
     """
     t_myr = 75 * rock_radii**2
 

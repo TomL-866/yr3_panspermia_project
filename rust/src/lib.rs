@@ -7,7 +7,7 @@ mod rock_dist;
 use pyo3::prelude::*;
 use rand::{rngs::ThreadRng, Rng};
 
-const RUNS: usize = 1_000_000;
+const RUNS: usize = 10_000_000;
 
 #[pyfunction]
 pub fn get_stellar_masses() -> Vec<f64> {

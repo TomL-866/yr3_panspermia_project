@@ -10,10 +10,12 @@ from rock_calcs.conversions import rock_mass_to_radius, rock_radius_to_lifetime
 
 
 def get_rock_dist() -> np.ndarray:
-    """This function generates a rock mass distribution
+    """Returns the rock mass distribution.
+    This function pulls the values from the Rust library.
+    To see the Rust source code, look in the `rust/src` directory.
 
     Returns:
-        np.ndarray: Rock mass distribution in kg
+        np.ndarray: Rock mass distribution.
     """
     rock_masses: np.ndarray = np.array(get_rock_masses(), dtype=np.float64)
     return rock_masses

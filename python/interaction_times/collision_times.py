@@ -5,7 +5,7 @@ from helpers import load_stellar_mass_file
 
 
 def t_coll_earth(n_o: float, v_o: float) -> float:
-    """Get collision time of 'Oumuamua-like object with Earth
+    """Finds collision time of 'Oumuamua-like object with Earth
 
     Args:
         n_o (float): Number density of 'Oumuamua-like objects in SI units
@@ -24,8 +24,11 @@ def t_coll_earth(n_o: float, v_o: float) -> float:
     return 1 / (n_o * C * v_o)
 
 
-def t_coll_disk(n_o: float, v_o: float, disk: DiskCalcs) -> np.ndarray:
-    """Get collision time of 'Oumuamua-like object with dust disk
+def t_coll_disk(
+    n_o: float, v_o: float, disk: DiskCalcs
+) -> tuple(np.ndarray, np.ndarray):
+    """Finds collision time of 'Oumuamua-like object with a disk
+    for both side and top cross sectional areas
 
     Args:
         n_o (float): Number density of 'Oumuamua-like objects in SI units
@@ -33,9 +36,9 @@ def t_coll_disk(n_o: float, v_o: float, disk: DiskCalcs) -> np.ndarray:
         disk (DiskCalcs): Disk object
 
     Returns:
-        np.ndarray: Collision times for 'Oumuamua for each disk
+        np.ndarray: Collision time in SI units for side cross sectional area
+        np.ndarray: Collision time in SI units for top cross sectional area
     """
-
     stellar_mass: np.ndarray = load_stellar_mass_file()
 
     disk: DiskCalcs = DiskCalcs(stellar_mass)

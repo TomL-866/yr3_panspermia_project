@@ -6,7 +6,7 @@ from helpers import get_base_dir
 
 class DiskCalcs:
     """This class is here to group together functions that calculate
-    values for the disk around the star.
+    values for the disk around a star.
 
     It takes in a stellar mass and calculates the radius, reduced radius,
     volume, mass, dust mass, and density of the disk.
@@ -49,15 +49,9 @@ class DiskCalcs:
         return self.csa_topview
 
     def find_radius(self, stellar_mass: np.ndarray) -> np.ndarray:
-        """Get disk radius from stellar mass.
-        This function is based on Equation 13
-        from https://doi.org/10.1093/mnras/stac1513
+        # This function is based on Equation 13
+        # from https://doi.org/10.1093/mnras/stac1513
 
-        Args:
-            stellar_mass (np.ndarray): Stellar mass in SI units
-        Returns:
-            np.ndarray: Radius of disk in SI units
-        """
         au_to_m: float = astro_const.au.value
         m_sun: float = astro_const.M_sun.value
         return 200 * au_to_m * (stellar_mass / m_sun) ** (0.3)
@@ -67,71 +61,28 @@ class DiskCalcs:
         return disk_radius / 1e7
 
     def find_volume_slab_geometry(self, disk_radius: np.ndarray) -> np.ndarray:
-        """Get disk volume from disk radius and height using slab geometry
-
-        Args:
-            disk_radius (np.ndarray): Radius of disk in SI units
-        Returns:
-            np.ndarray: Volume of disk in SI units
-        """
         au_to_m: float = astro_const.au.value
         disk_height: float = 0.1 * 1 * au_to_m
         circumference: float = 2 * np.pi * disk_radius
         return disk_radius * disk_height * circumference
 
     def find_csa_sideview(self, disk_radius: np.ndarray) -> np.ndarray:
-        """Get cross sectional area of disk from disk radius
-
-        Args:
-            disk_radius (np.ndarray): Radius of disk in SI units
-        Returns:
-            np.ndarray: Cross sectional area of disk in SI units
-        """
         au_to_m: float = astro_const.au.value
         disk_height: float = 0.1 * au_to_m
         return disk_radius * disk_height
 
     def find_csa_topview(self, disk_radius: np.ndarray) -> np.ndarray:
-        """Get cross sectional area of disk from disk radius
-
-        Args:
-            disk_radius (np.ndarray): Radius of disk in SI units
-        Returns:
-            np.ndarray: Cross sectional area of disk in SI units
-        """
         return np.pi * disk_radius**2
 
     def find_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
-        """Get disk mass from stellar mass
-
-        Args:
-            stellar_mass (np.ndarray): Stellar mass in SI units
-        Returns:
-            np.ndarray: Mass of disk in SI units
-        """
         return 0.1 * stellar_mass
 
     def find_dust_mass(self, stellar_mass: np.ndarray) -> np.ndarray:
-        """Get dust mass from stellar mass
-
-        Args:
-            stellar_mass (np.ndarray): Stellar mass in SI units
-        Returns:
-            np.ndarray: Mass of dust in disk in SI units
-        """
         return 0.01 * self.find_mass(stellar_mass)
 
     def find_density(
         self, disk_volume: np.ndarray, stellar_mass: np.ndarray
     ) -> np.ndarray:
-        """Get disk density from disk volume and stellar mass
-
-        Args:
-            disk_volume (np.ndarray): Volume of disk in SI units
-            stellar_mass (np.ndarray): Stellar mass in SI units
-        Returns:
-            np.ndarray: Density of disk in SI units
-        """
         dust_mass = self.find_dust_mass(stellar_mass)
         return (
             dust_mass / disk_volume

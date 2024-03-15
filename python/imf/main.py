@@ -5,17 +5,18 @@ from imf.plot_and_save import plot_imf_histogram, save_imf_values
 
 
 def get_stellar_mass_array() -> np.ndarray:
-    """Get stellar mass array from quantile function
+    """Returns the array of stellar masses.
+    This function uses values from the Rust library.
+    To see the source code, look in the `rust/src` directory.
 
     Returns:
-        np.ndarray: Stellar mass array (SI units)
+        np.ndarray: Stellar mass array (SI)
     """
     print("Calculating stellar masses...")
     return np.array(get_stellar_masses(), dtype=float)
 
 
 def main(stellar_mass: np.ndarray) -> None:
-    """Main function"""
     print("Plotting IMF histogram...")
     plot_imf_histogram(stellar_mass)
 

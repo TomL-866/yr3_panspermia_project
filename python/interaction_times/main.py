@@ -3,21 +3,24 @@ from interaction_times.collision_times import t_coll_disk, t_coll_earth
 from helpers import get_base_dir
 from disk_calcs.disk import DiskCalcs
 
+AU_TO_M: float = 1.49597871e11
+
+# https://www.doi.org/10.3847/2041-8213/aaae67 gives the
+# number density of 'Oumuamua-like objects as 0.2 per cubic AU
+N_O: float = 0.2 * 1 / (AU_TO_M**3)  # SI units
+
+# https://doi.org/10.1038/nature25020 gives the
+# velocity of 'Oumuamua-like object as 26 km/s.
+# See also https://doi.org/10.1051/0004-6361/202141283.
+
+# This is speed relative to the Sun.
+# NOTE: https://www.nature.com/articles/s41550-019-0816-x gives a much more accurate value
+V_O: float = 26e3  # SI units
+
 
 def calc_coll_time_earth() -> None:
-    au_to_m: float = 1.49597871e11
-
-    # https://www.doi.org/10.3847/2041-8213/aaae67 gives the
-    # number density of 'Oumuamua-like objects as 0.2 per cubic AU
-    n_o: float = 0.2 * 1 / (au_to_m**3)  # SI units
-
-    # https://doi.org/10.1038/nature25020 gives the
-    # velocity of 'Oumuamua-like object as 26 km/s.
-    # See also https://doi.org/10.1051/0004-6361/202141283.
-
-    # This is speed relative to the Sun.
-    # NOTE: https://www.nature.com/articles/s41550-019-0816-x gives a much more accurate value
-    v_o: float = 26e3  # SI units
+    n_o = N_O
+    v_o = V_O
 
     collision_time = t_coll_earth(n_o, v_o)
 
@@ -28,18 +31,8 @@ def calc_coll_time_earth() -> None:
 
 
 def calc_coll_time_disk(stellar_mass: np.ndarray) -> None:
-    au_to_m: float = 1.49597871e11
-
-    # https://www.doi.org/10.3847/2041-8213/aaae67 gives the
-    # number density of 'Oumuamua-like objects as 0.2 per cubic AU
-    n_o: float = 0.2 * 1 / (au_to_m**3)  # SI units
-
-    # https://doi.org/10.1038/nature25020 gives the
-    # velocity of 'Oumuamua-like object as 26 km/s.
-    # See also https://doi.org/10.1051/0004-6361/202141283.
-
-    # This is speed relative to the Sun.
-    v_o: float = 26e3  # SI units
+    v_o = V_O
+    n_o = N_O
 
     disk = DiskCalcs(stellar_mass)
 
