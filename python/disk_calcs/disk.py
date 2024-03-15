@@ -36,6 +36,9 @@ class DiskCalcs:
     def get_radius(self) -> np.ndarray:
         return self.radius
 
+    def get_reduced_radius(self) -> np.ndarray:
+        return self.reduced_radius
+
     def get_mass(self) -> np.ndarray:
         return self.find_mass(self.stellar_mass)
 

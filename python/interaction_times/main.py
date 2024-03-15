@@ -19,15 +19,7 @@ def calc_coll_time_earth() -> None:
     # NOTE: https://www.nature.com/articles/s41550-019-0816-x gives a much more accurate value
     v_o: float = 26e3  # SI units
 
-    days_in_a_year: float = (
-        365 + 0.25 - 0.01 + 0.0025 - 0.00025
-    )  # 365.2425 days for Gregorian calendar
-
     collision_time = t_coll_earth(n_o, v_o)
-
-    print(
-        f"Time for collision between 'Oumuamua and Earth: {collision_time / (days_in_a_year * 24 * 60 * 60 * 1e6)} Myr"
-    )
 
     np.save(
         f"{get_base_dir()}/output/values/collision_time_earth.npy",
@@ -35,7 +27,7 @@ def calc_coll_time_earth() -> None:
     )
 
 
-def calc_coll_time_disk(disk: DiskCalcs) -> None:
+def calc_coll_time_disk(stellar_mass: np.ndarray) -> None:
     au_to_m: float = 1.49597871e11
 
     # https://www.doi.org/10.3847/2041-8213/aaae67 gives the
@@ -49,27 +41,20 @@ def calc_coll_time_disk(disk: DiskCalcs) -> None:
     # This is speed relative to the Sun.
     v_o: float = 26e3  # SI units
 
-    # days_in_a_year: float = (
-    #     365 + 0.25 - 0.01 + 0.0025 - 0.00025
-    # )  # 365.2425 days for Gregorian calendar
+    disk = DiskCalcs(stellar_mass)
 
-    csa_side_on: float = disk.get_csa_sideview()
-    csa_top_down: float = disk.get_csa_topview()
-
-    collision_time_side_on: float = t_coll_disk(n_o, v_o, csa_side_on, disk)
-    collision_time_top_down: float = t_coll_disk(n_o, v_o, csa_top_down, disk)
+    collision_times_side_on, collision_times_top_down = t_coll_disk(n_o, v_o, disk)
 
     np.save(
         f"{get_base_dir()}/output/values/collision_times_disk_sideon.npy",
-        collision_time_side_on,
+        collision_times_side_on,
     )
     np.save(
         f"{get_base_dir()}/output/values/collision_times_disk_topdown.npy",
-        collision_time_top_down,
+        collision_times_top_down,
     )
 
 
 def main(stellar_mass: np.ndarray) -> None:
     calc_coll_time_earth()
-    disk = DiskCalcs(stellar_mass)
-    calc_coll_time_disk(disk)
+    calc_coll_time_disk(stellar_mass)

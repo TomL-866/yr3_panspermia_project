@@ -24,13 +24,12 @@ def t_coll_earth(n_o: float, v_o: float) -> float:
     return 1 / (n_o * C * v_o)
 
 
-def t_coll_disk(n_o: float, v_o: float, csa: float, disk: DiskCalcs) -> np.ndarray:
+def t_coll_disk(n_o: float, v_o: float, disk: DiskCalcs) -> np.ndarray:
     """Get collision time of 'Oumuamua-like object with dust disk
 
     Args:
         n_o (float): Number density of 'Oumuamua-like objects in SI units
         v_o (float): Velocity of 'Oumuamua-like object in SI units
-        csa (float): Cross sectional area of disk in SI units
         disk (DiskCalcs): Disk object
 
     Returns:
@@ -39,13 +38,18 @@ def t_coll_disk(n_o: float, v_o: float, csa: float, disk: DiskCalcs) -> np.ndarr
 
     stellar_mass: np.ndarray = load_stellar_mass_file()
 
+    disk: DiskCalcs = DiskCalcs(stellar_mass)
     disk_mass: np.ndarray = disk.get_mass()
-    disk_radius: np.ndarray = disk.get_radius()
+    disk_radius: np.ndarray = disk.get_reduced_radius()
+
+    csa_sideview: np.ndarray = disk.get_csa_sideview()
+    csa_topview: np.ndarray = disk.get_csa_topview()
 
     G: float = astro_const.G.value
 
     v_esc: float = np.sqrt(2 * G * (stellar_mass + disk_mass) / disk_radius)
 
-    C: float = csa * (1 + v_esc**2 / v_o**2)  # Collision cross section in SI units
+    C_side: float = csa_sideview * (1 + v_esc**2 / v_o**2)
+    C_top: float = csa_topview * (1 + v_esc**2 / v_o**2)
 
-    return 1 / (n_o * C * v_o)
+    return 1 / (n_o * C_side * v_o), 1 / (n_o * C_top * v_o)
