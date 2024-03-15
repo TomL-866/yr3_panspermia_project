@@ -2,7 +2,6 @@ const P: f64 = 1.8;
 const M_MOON: f64 = 7.34767309e22;
 const M_LOW: f64 = 10.0;
 const M_UPP: f64 = M_MOON;
-const M_EARTH: f64 = 5.97216787e24;
 
 /// This function generates a mass distribution of rocks,
 /// rocks being the type of rock 'Oumuamua is thought to be.
