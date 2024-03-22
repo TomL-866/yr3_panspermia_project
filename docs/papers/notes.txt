@@ -1,0 +1,1 @@
+Lab simulation paper states that even with a cavity of 7 micrometres 10% survive radiation of 7500 J/m^2. F_UV in ISM is 1.8e-3 erg/s/cm^2, which is 1.8e-6 J/s/m^2. Therefore, it would take 1.8e-6 * time = 7500 => time = 4.2e9 seconds = 132 years to die in a 7 micrometre cavity. 
