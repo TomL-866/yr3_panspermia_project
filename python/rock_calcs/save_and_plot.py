@@ -1,3 +1,4 @@
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 from helpers import get_base_dir
@@ -82,3 +83,26 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     plt.savefig(get_base_dir() + "/output/graphs/rock_lifetime_vs_rock_radius.png")
     # plt.savefig(get_base_dir() + "/output/graphs/rock_lifetime_vs_rock_radius.pgf")
     plt.close()
+
+
+def plot_lifetime_vs_coll_times() -> None:
+    lifetimes = np.load(get_base_dir() + "/output/values/rock_lifetimes.npy")
+    coll_times_dict = json.load(
+        open(get_base_dir() + "/output/values/mc_earth_coll_times.json")
+    )
+    coll_times = []
+    coll_times_keys = []
+
+    for key1, sub_dict in coll_times_dict.items():
+        for key2, value in sub_dict.items():
+            coll_times.append(value)
+            coll_times_keys.append([key1, key2])
+
+    # plt.figure()
+    # for i, coll_time in enumerate(coll_times):
+    #     plt.scatter(
+    #         coll_times[i],
+    #         lifetimes[i],
+    #         label=f"n_o: {coll_times_keys[i][0]} v_o: {coll_times_keys[i][1]}",
+    #     )
+    # plt.savefig(get_base_dir() + "/output/graphs/lifetime_vs_coll_times.png")

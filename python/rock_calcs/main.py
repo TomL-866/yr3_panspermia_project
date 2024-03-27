@@ -4,6 +4,7 @@ from rock_calcs.save_and_plot import (
     plot_rock_dist,
     save_rock_lifetimes,
     plot_rock_lifetimes,
+    plot_lifetime_vs_coll_times,
 )
 from rust import get_rock_masses
 from rock_calcs.conversions import rock_mass_to_radius, rock_radius_to_lifetime
@@ -37,3 +38,6 @@ def main() -> None:
     save_rock_lifetimes(rock_lifetimes)
     print("Plotting rock lifetimes...")
     plot_rock_lifetimes(rock_radii, rock_lifetimes)
+
+    print("Plotting survival times vs coll times...")
+    plot_lifetime_vs_coll_times()

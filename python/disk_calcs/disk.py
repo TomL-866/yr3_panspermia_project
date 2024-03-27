@@ -16,6 +16,7 @@ class DiskCalcs:
     def __init__(self, stellar_mass: np.ndarray):
         print("Calculating disk values...")
         self.stellar_mass: np.ndarray = stellar_mass
+        self.disk_mass: np.ndarray = self.find_mass(stellar_mass)  # Disk mass
         self.radius: np.ndarray = self.find_radius(stellar_mass)  # Disk radius
         self.reduced_radius: np.ndarray = self.reduce_radius(
             self.radius
@@ -40,7 +41,7 @@ class DiskCalcs:
         return self.reduced_radius
 
     def get_mass(self) -> np.ndarray:
-        return self.find_mass(self.stellar_mass)
+        return self.disk_mass
 
     def get_csa_sideview(self) -> np.ndarray:
         return self.csa_sideview
