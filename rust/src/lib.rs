@@ -1,9 +1,9 @@
 extern crate pyo3;
 extern crate rand;
 
+mod monte_carlo;
 mod quantile_function;
 mod rock_dist;
-mod monte_carlo;
 use monte_carlo::Key;
 
 use pyo3::prelude::*;
@@ -18,7 +18,7 @@ use pyo3::types::PyFloat;
 
 impl IntoPy<PyObject> for Key {
     fn into_py(self, py: Python) -> PyObject {
-        PyFloat::new(py, self.value).into() 
+        PyFloat::new(py, self.value).into()
     }
 }
 
@@ -46,7 +46,11 @@ pub fn get_rock_masses() -> Vec<f64> {
 }
 
 #[pyfunction]
-pub fn return_coll_times() -> (HashMap<Key, HashMap<Key, f64>>, HashMap<Key, HashMap<Key, HashMap<Key, f64>>>, HashMap<Key, HashMap<Key, HashMap<Key, f64>>>) {
+pub fn return_coll_times() -> (
+    HashMap<Key, HashMap<Key, f64>>,
+    HashMap<Key, HashMap<Key, HashMap<Key, f64>>>,
+    HashMap<Key, HashMap<Key, HashMap<Key, f64>>>,
+) {
     let mut n_o: Vec<f64> = vec![0.01, 0.05, 0.1, 0.5, 1.0];
     let mut v_o: Vec<f64> = vec![1.0, 5.0, 10.0, 20.0, 30.0];
 
@@ -60,7 +64,7 @@ pub fn return_coll_times() -> (HashMap<Key, HashMap<Key, f64>>, HashMap<Key, Has
 
     let stellar_masses: Vec<f64> = get_stellar_masses();
 
-    monte_carlo::get_coll_times(n_o, v_o, stellar_masses)
+    monte_carlo::get_coll_times(n_o, v_o, stellar_masses) // Everything in SI units
 }
 
 #[pymodule]
