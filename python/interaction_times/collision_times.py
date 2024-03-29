@@ -55,35 +55,3 @@ def t_coll_disk(
     C_top: float = csa_topview * (1 + v_esc**2 / v_o**2)
 
     return 1 / (n_o * C_side * v_o), 1 / (n_o * C_top * v_o)
-
-
-def get_t_coll_range(
-    n_o: np.ndarray, v_o: np.ndarray, disk: DiskCalcs, stellar_mass: np.ndarray
-) -> tuple[dict, dict, dict]:
-
-    coll_times_earth: dict = {}
-    # coll_times_disk_side: dict = {}
-    # coll_times_disk_top: dict = {}
-
-    for i, density in enumerate(list(n_o)):
-        density_key: float = density * AU_TO_M**3
-
-        if density_key not in coll_times_earth:
-            coll_times_earth[density_key] = {}
-        # if density not in coll_times_disk_side:
-        #     coll_times_disk_side[density] = {}
-        # if density not in coll_times_disk_top:
-        #     coll_times_disk_top[density] = {}
-
-        for j, velocity in enumerate(list(v_o)):
-            coll_times_earth[density_key][velocity] = t_coll_earth(density, velocity)
-            # coll_times_disk_side[density][velocity] = t_coll_disk(
-            #     density, velocity, disk, stellar_mass
-            # )[0].tolist()
-
-            # coll_times_disk_top[density][velocity] = t_coll_disk(
-            #     density, velocity, disk, stellar_mass
-            # )[1].tolist()
-
-    # return coll_times_earth, coll_times_disk_side, coll_times_disk_top
-    return coll_times_earth, {}, {}

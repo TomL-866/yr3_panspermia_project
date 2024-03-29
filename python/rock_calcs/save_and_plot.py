@@ -1,7 +1,8 @@
-import json
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 from helpers import get_base_dir
+import rust
 
 # All consts are in SI units
 M_MOON = 7.34767309e22
@@ -86,23 +87,88 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
 
 
 def plot_lifetime_vs_coll_times() -> None:
-    lifetimes = np.load(get_base_dir() + "/output/values/rock_lifetimes.npy")
-    coll_times_dict = json.load(
-        open(get_base_dir() + "/output/values/mc_earth_coll_times.json")
+    # earth_coll_times is a dictionary of a dictionary.
+    # The first key is n_o, the second key is v_o.
+    # The value is the collision time.
+    earth_coll_times = rust.return_coll_times()[0]
+
+    # n_o_keys_earth = earth_coll_times.keys()
+    # v_o_keys_earth = earth_coll_times[list(n_o_keys_earth)[0]].keys()
+    # collision_times_earth_forloop = []
+    # for n_o in n_o_keys_earth:
+    #     for v_o in v_o_keys_earth:
+    #         collision_times_earth_forloop.append(earth_coll_times[n_o][v_o])
+
+    earth_df = pd.DataFrame(
+        [
+            (n_o, v_o, time)
+            for n_o, v_o_dict in earth_coll_times.items()
+            for v_o, time in v_o_dict.items()
+        ],
+        columns=["n_o", "v_o", "time"],
     )
-    coll_times = []
-    coll_times_keys = []
 
-    for key1, sub_dict in coll_times_dict.items():
-        for key2, value in sub_dict.items():
-            coll_times.append(value)
-            coll_times_keys.append([key1, key2])
+    # disk_coll_times_side is a dictionary of a dictionary of a dictionary.
+    # The first key is a stellar mass, the second key is n_o, the third key is v_o.
+    # The value is the collision time.
+    disk_coll_times_side = rust.return_coll_times()[1]
 
-    # plt.figure()
-    # for i, coll_time in enumerate(coll_times):
-    #     plt.scatter(
-    #         coll_times[i],
-    #         lifetimes[i],
-    #         label=f"n_o: {coll_times_keys[i][0]} v_o: {coll_times_keys[i][1]}",
-    #     )
-    # plt.savefig(get_base_dir() + "/output/graphs/lifetime_vs_coll_times.png")
+    # stellar_keys_side = disk_coll_times_side.keys()
+    # n_o_keys_side = disk_coll_times_side[list(stellar_keys_side)[0]].keys()
+    # v_o_keys_side = disk_coll_times_side[list(stellar_keys_side)[0]][
+    #     list(n_o_keys_side)[0]
+    # ].keys()
+    # collision_times_disk_side = []
+    # for stellar_mass in stellar_keys_side:
+    #     for n_o in n_o_keys_side:
+    #         for v_o in v_o_keys_side:
+    #             collision_times_disk_side.append(
+    #                 disk_coll_times_side[stellar_mass][n_o][v_o]
+    #             )
+
+    side_df = pd.DataFrame(
+        [
+            (stellar_mass, n_o, v_o, time)
+            for stellar_mass, n_o_dict in disk_coll_times_side.items()
+            for n_o, v_o_dict in n_o_dict.items()
+            for v_o, time in v_o_dict.items()
+        ],
+        columns=["stellar_mass", "n_o", "v_o", "time"],
+    )
+
+    # disk_coll_times_top is a dictionary of a dictionary of a dictionary.
+    # The first key is a stellar mass, the second key is n_o, the third key is v_o.
+    # The value is the collision time.
+    disk_coll_times_top = rust.return_coll_times()[2]
+
+    # stellar_keys_top = disk_coll_times_top.keys()
+    # n_o_keys_top = disk_coll_times_top[list(stellar_keys_top)[0]].keys()
+    # v_o_keys_top = disk_coll_times_top[list(stellar_keys_top)[0]][
+    #     list(n_o_keys_top)[0]
+    # ].keys()
+    # collision_times_disk_top = []
+    # for stellar_mass in stellar_keys_top:
+    #     for n_o in n_o_keys_top:
+    #         for v_o in v_o_keys_top:
+    #             collision_times_disk_top.append(
+    #                 disk_coll_times_top[stellar_mass][n_o][v_o]
+    #             )
+
+    top_df = pd.DataFrame(
+        [
+            (stellar_mass, n_o, v_o, time)
+            for stellar_mass, n_o_dict in disk_coll_times_top.items()
+            for n_o, v_o_dict in n_o_dict.items()
+            for v_o, time in v_o_dict.items()
+        ],
+        columns=["stellar_mass", "n_o", "v_o", "time"],
+    )
+
+    print(earth_df["time"].mean())
+    print(side_df["time"].mean())
+    print(top_df["time"].mean())
+
+    print("\n ---- \n")
+    print(earth_df.head())
+    print(side_df.head())
+    print(top_df.head())
