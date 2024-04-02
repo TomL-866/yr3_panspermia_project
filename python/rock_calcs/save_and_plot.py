@@ -1,8 +1,10 @@
 import numpy as np
+import astropy.constants as astro_const
 import matplotlib.pyplot as plt
 import pandas as pd
 from helpers import get_base_dir
 import rust
+from helpers import sig_figs
 
 # All consts are in SI units
 M_MOON = 7.34767309e22
@@ -86,7 +88,7 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
     plt.close()
 
 
-def plot_lifetime_vs_coll_times() -> None:
+def extract_colltimes() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     # earth_coll_times is a dictionary of a dictionary.
     # The first key is n_o, the second key is v_o.
     # The value is the collision time.
@@ -105,7 +107,7 @@ def plot_lifetime_vs_coll_times() -> None:
             for n_o, v_o_dict in earth_coll_times.items()
             for v_o, time in v_o_dict.items()
         ],
-        columns=["n_o", "v_o", "time"],
+        columns=["n_o", "v_o", "coll_time"],
     )
 
     # disk_coll_times_side is a dictionary of a dictionary of a dictionary.
@@ -133,7 +135,7 @@ def plot_lifetime_vs_coll_times() -> None:
             for n_o, v_o_dict in n_o_dict.items()
             for v_o, time in v_o_dict.items()
         ],
-        columns=["stellar_mass", "n_o", "v_o", "time"],
+        columns=["stellar_mass", "n_o", "v_o", "coll_time"],
     )
 
     # disk_coll_times_top is a dictionary of a dictionary of a dictionary.
@@ -161,14 +163,117 @@ def plot_lifetime_vs_coll_times() -> None:
             for n_o, v_o_dict in n_o_dict.items()
             for v_o, time in v_o_dict.items()
         ],
-        columns=["stellar_mass", "n_o", "v_o", "time"],
+        columns=["stellar_mass", "n_o", "v_o", "coll_time"],
     )
 
-    print(earth_df["time"].mean())
-    print(side_df["time"].mean())
-    print(top_df["time"].mean())
+    return earth_df, side_df, top_df
 
-    print("\n ---- \n")
-    print(earth_df.head())
-    print(side_df.head())
-    print(top_df.head())
+
+def earth_lifetime_coll_time_plot(earth_df, colors) -> None:
+    v_o_full = np.unique(earth_df["v_o"])
+    n_o_full = np.unique(earth_df["n_o"])
+
+    plt.figure()
+    plt.yticks(
+        v_o_full,  # Positions
+        [1, 5, 10, 20, 30],  # Labels (v_o in km/s)
+    )
+    plt.xlabel("Collision time with Earth (Myr)")
+    plt.ylabel("v$_o$ (km/s)")
+
+    for i, v_o in enumerate(v_o_full):
+        for j, n_o in enumerate(n_o_full):
+            coll_times = earth_df.loc[
+                (earth_df["v_o"] == v_o) & (earth_df["n_o"] == n_o)
+            ]["coll_time"].to_numpy()
+
+            if i == 0:
+                plt.scatter(
+                    coll_times / (10**6 * 365.25 * 24 * 60 * 60),
+                    v_o_full[i],
+                    color=colors[j],
+                    label=f"n$_o$ = {sig_figs(n_o * astro_const.au.value**3, 1)} AU$^{{-3}}$",
+                )
+            plt.scatter(
+                coll_times / (10**6 * 365.25 * 24 * 60 * 60),
+                v_o_full[i],
+                color=colors[j],
+            )
+    # Plot dotted line that represents maximum rock survival time
+    rock_survival_times = np.load(f"{get_base_dir()}/output/values/rock_lifetimes.npy")
+
+    plt.axvline(
+        x=np.max(rock_survival_times) / (10**6 * 365.25 * 24 * 60 * 60),
+        color="black",
+        linestyle="--",
+        label="Maximum rock survival time",
+    )
+    plt.axvline(
+        np.median(rock_survival_times) / (10**6 * 365.25 * 24 * 60 * 60),
+        color="orange",
+        linestyle="--",
+        label="Median rock survival time",
+    )
+    plt.axvline(
+        np.min(rock_survival_times) / (10**6 * 365.25 * 24 * 60 * 60),
+        color="purple",
+        linestyle="--",
+        label="Minimum rock survival time",
+    )
+
+    plt.xscale("log")
+    plt.legend()
+    plt.savefig(get_base_dir() + "/output/graphs/lifetime_vs_coll_times.png")
+
+
+import matplotlib.patches as mpatches
+
+
+def disk_lifetime_coll_time_plot(disk_df, colors, view) -> None:
+    n_o_full = np.unique(disk_df["n_o"])
+
+    fig = plt.figure()
+    ax = fig.add_subplot(projection="3d")
+
+    color_dict = {n_o: colors[i] for i, n_o in enumerate(n_o_full)}
+    color_values = disk_df["n_o"].map(color_dict)
+
+    ax.scatter(
+        np.log10(disk_df["coll_time"] / (10**6 * 365.25 * 24 * 60 * 60)),
+        disk_df["v_o"] / 1e3,
+        disk_df["stellar_mass"],
+        c=color_values,
+    )
+
+    patches = [
+        mpatches.Patch(
+            color=color,
+            label=f"n$_o$ = {sig_figs(n_o * astro_const.au.value**3, 1)} AU$^{{-3}}$",
+        )
+        for n_o, color in color_dict.items()
+    ]
+    ax.legend(handles=patches, loc="upper right")
+
+    ax.set_xlabel(f"log$_{{10}}$ of Collision time with disk's {view} (Myr)")
+    ax.set_ylabel("v$_o$ (km/s)")
+    ax.set_zlabel("Stellar mass (M$_\odot$)")
+    plt.savefig(
+        f"{get_base_dir()}/output/graphs/lifetime_vs_coll_times_disk_{view}.png"
+    )
+    plt.close()
+
+
+def plot_lifetime_vs_coll_times() -> None:
+    earth_df, side_df, top_df = extract_colltimes()
+
+    colors = [
+        "#000000",
+        "#E69F00",
+        "#56B4E9",
+        "#009E73",
+        "#F0E442",
+    ]  # Colour-blind-friendly colours
+
+    earth_lifetime_coll_time_plot(earth_df, colors)
+    disk_lifetime_coll_time_plot(side_df, colors, "side")
+    disk_lifetime_coll_time_plot(top_df, colors, "top")
