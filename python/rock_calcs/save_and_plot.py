@@ -2,9 +2,8 @@ import numpy as np
 import astropy.constants as astro_const
 import matplotlib.pyplot as plt
 import pandas as pd
-from helpers import get_base_dir
+from helpers import get_base_dir, sig_figs
 import rust
-from helpers import sig_figs
 
 # All consts are in SI units
 M_MOON = 7.34767309e22
@@ -37,10 +36,11 @@ def plot_rock_dist(rock_masses: np.ndarray) -> None:
     )
     plt.yscale("log")
     plt.xscale("log")
-    plt.xlim(M_LOW, M_UPP)
+    plt.xlim(M_LOW, np.max(rock_masses))
+    print(f"MAX ROCK MASS: {np.max(rock_masses)}")
     plt.xlabel("Rock mass (kg)")
     plt.ylabel("Frequency")
-    plt.title("Rock Mass Distribution")
+    # plt.title("Rock Mass Distribution")
     plt.savefig(get_base_dir() + "/output/graphs/rock_mass_histogram.png")
     # plt.savefig(get_base_dir() + "/output/graphs/rock_mass_histogram.pgf")
     plt.close()
@@ -77,12 +77,22 @@ def plot_rock_lifetimes(rock_radii: np.ndarray, rock_lifetimes: np.ndarray) -> N
         rock_radii[mask],
         rock_lifetimes[mask] / (10**6 * days_in_a_year * 24 * 60 * 60),
     )
+    # plot horizontal line showing the age of the universe
+    age_of_universe_myr = 13.787e3
+    plt.hlines(
+        age_of_universe_myr,
+        rock_radii[0],
+        rock_radii[-1],
+        colors="r",
+        linestyles="--",
+        label="Age of the Universe",
+    )
 
     plt.yscale("log")
     # plt.xscale("log")
     plt.xlabel("Rock radii (m)")
     plt.ylabel("Rock lifetime (Myr)")
-    plt.title("Rock Lifetime vs Radius of rock")
+    # plt.title("Rock Lifetime vs Radius of rock")
     plt.savefig(get_base_dir() + "/output/graphs/rock_lifetime_vs_rock_radius.png")
     # plt.savefig(get_base_dir() + "/output/graphs/rock_lifetime_vs_rock_radius.pgf")
     plt.close()

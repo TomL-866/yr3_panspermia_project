@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from interaction_times.collision_times import (
     t_coll_disk,
     t_coll_earth,
@@ -55,3 +56,23 @@ def main(stellar_mass: np.ndarray) -> None:
     calc_coll_time_earth()
     disk: DiskCalcs = DiskCalcs(stellar_mass)
     calc_coll_time_disk(stellar_mass, disk)
+
+    print("Summary statistics for collision times:")
+
+    print("Disk (side-on):")
+    disk_sideon_df = pd.DataFrame(
+        np.load(f"{get_base_dir()}/output/values/collision_times_disk_sideon.npy")
+        / (365.25 * 1e6),
+        columns=["Collision Time (Myr)"],
+    )
+    print(disk_sideon_df.describe())
+    print(f"median: {disk_sideon_df.median()}")
+
+    print("Disk (top-down):")
+    disk_topdown_df = pd.DataFrame(
+        np.load(f"{get_base_dir()}/output/values/collision_times_disk_topdown.npy")
+        / (365.25 * 1e6),
+        columns=["Collision Time (Myr)"],
+    )
+    print(disk_topdown_df.describe())
+    print(f"median: {disk_topdown_df.median()}")

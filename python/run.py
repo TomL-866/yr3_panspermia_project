@@ -19,6 +19,9 @@ if __name__ == "__main__":
     #     }
     # )
 
+    matplotlib.rcParams.update({"font.size": 14})
+    matplotlib.rcParams.update({"figure.autolayout": True})
+
     start = time.perf_counter()
 
     print("\n---PROGRAM START---")
