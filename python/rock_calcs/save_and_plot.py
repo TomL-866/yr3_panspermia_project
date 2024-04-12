@@ -212,6 +212,14 @@ def earth_lifetime_coll_time_plot(earth_df, colors) -> None:
     # Plot dotted line that represents maximum rock survival time
     rock_survival_times = np.load(f"{get_base_dir()}/output/values/rock_lifetimes.npy")
 
+    print("Summary statistics for rock survival times:")
+    disk_sideon_df = pd.DataFrame(
+        rock_survival_times / (365.25 * 24 * 60 * 60 * 10**6),
+        columns=["Survival Time (Myr)"],
+    )
+    print(disk_sideon_df.describe())
+    print(f"median: {disk_sideon_df.median()}")
+
     plt.axvline(
         x=np.max(rock_survival_times) / (10**6 * 365.25 * 24 * 60 * 60),
         color="black",
@@ -231,8 +239,8 @@ def earth_lifetime_coll_time_plot(earth_df, colors) -> None:
         label="Minimum rock survival time",
     )
 
-    plt.xscale("log")
     plt.legend()
+    plt.xscale("log")
     plt.savefig(get_base_dir() + "/output/graphs/lifetime_vs_coll_times.png")
 
 
@@ -262,8 +270,7 @@ def disk_lifetime_coll_time_plot(disk_df, colors, view) -> None:
         )
         for n_o, color in color_dict.items()
     ]
-    ax.legend(handles=patches, loc="upper right")
-
+    ax.legend(handles=patches)
     ax.set_xlabel(f"log$_{{10}}$ of Collision time with disk's {view} (Myr)")
     ax.set_ylabel("v$_o$ (km/s)")
     ax.set_zlabel("Stellar mass (M$_\odot$)")
