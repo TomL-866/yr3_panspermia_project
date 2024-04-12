@@ -17,7 +17,7 @@ def plot_imf_histogram(stellar_mass_array: np.ndarray) -> None:
         stellar_mass_array / astro_const.M_sun.value,
         bins=bins,
     )
-    plt.xlim(10**-2, 10**2)
+    plt.xlim(10**-1, 10**2)
     plt.yscale("log")
     plt.xscale("log")
     plt.xlabel("Stellar Mass (M$_{\\odot}$)")

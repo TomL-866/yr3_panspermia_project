@@ -5,7 +5,7 @@ const MU: f64 = 0.2 * STELLAR_MASS;
 const ALPHA: f64 = 2.3;
 const BETA: f64 = 1.4;
 const UPPER_MASS_LIMIT: f64 = 50.0 * STELLAR_MASS; // This value is the only one different from the paper
-const LOWER_MASS_LIMIT: f64 = 0.01 * STELLAR_MASS;
+const LOWER_MASS_LIMIT: f64 = 0.1 * STELLAR_MASS;
 
 /// This function replicates the quantile function,
 /// Equation 4 in Table 1 of https://doi.org/10.1093/mnras/sts479.
