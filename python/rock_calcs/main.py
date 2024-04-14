@@ -8,6 +8,7 @@ from rock_calcs.save_and_plot import (
 )
 from rust import get_rock_masses
 from rock_calcs.conversions import rock_mass_to_radius, rock_radius_to_lifetime
+from helpers import get_base_dir
 
 
 def get_rock_dist() -> np.ndarray:
@@ -18,8 +19,9 @@ def get_rock_dist() -> np.ndarray:
     Returns:
         np.ndarray: Rock mass distribution.
     """
-    rock_masses: np.ndarray = np.array(get_rock_masses(), dtype=np.float64)
-    return rock_masses
+    # rock_masses: np.ndarray = np.array(get_rock_masses(), dtype=np.float64)
+    # return rock_masses
+    return np.load(f"{get_base_dir()}/output/values/rock_masses.npy")
 
 
 def main() -> None:

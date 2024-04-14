@@ -2,6 +2,7 @@ import numpy as np
 
 from rust import get_stellar_masses
 from imf.plot_and_save import plot_imf_histogram, save_imf_values
+from helpers import load_stellar_mass_file
 
 
 def get_stellar_mass_array() -> np.ndarray:
@@ -13,7 +14,8 @@ def get_stellar_mass_array() -> np.ndarray:
         np.ndarray: Stellar mass array (SI)
     """
     print("Calculating stellar masses...")
-    return np.array(get_stellar_masses(), dtype=float)
+    # return np.array(get_stellar_masses(), dtype=float)
+    return load_stellar_mass_file()
 
 
 def main(stellar_mass: np.ndarray) -> None:

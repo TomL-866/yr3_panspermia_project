@@ -119,6 +119,8 @@ def extract_colltimes() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         ],
         columns=["n_o", "v_o", "coll_time"],
     )
+    print("Summary statistics for Earth Monte Carlo:")
+    print(earth_df.describe())
 
     # disk_coll_times_side is a dictionary of a dictionary of a dictionary.
     # The first key is a stellar mass, the second key is n_o, the third key is v_o.
@@ -147,6 +149,8 @@ def extract_colltimes() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         ],
         columns=["stellar_mass", "n_o", "v_o", "coll_time"],
     )
+    print("Summary statistics for Disk (Side) Monte Carlo:")
+    print(side_df.describe())
 
     # disk_coll_times_top is a dictionary of a dictionary of a dictionary.
     # The first key is a stellar mass, the second key is n_o, the third key is v_o.
@@ -175,6 +179,8 @@ def extract_colltimes() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         ],
         columns=["stellar_mass", "n_o", "v_o", "coll_time"],
     )
+    print("Summary statistics for Disk (Top) Monte Carlo:")
+    print(top_df.describe())
 
     return earth_df, side_df, top_df
 
