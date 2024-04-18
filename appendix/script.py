@@ -24,7 +24,6 @@ def get_all_paths() -> list[str]:
                 # Append the path to the list
                 file_paths.append(os.path.join(dirpath, filename))
 
-    # Print the paths
     for path in file_paths:
         out.append(path)
 
