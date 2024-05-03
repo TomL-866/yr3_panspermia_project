@@ -195,7 +195,7 @@ def earth_lifetime_coll_time_plot(earth_df, colors) -> None:
         v_o_full,  # Positions
         [1, 5, 10, 20, 30],  # Labels (v_o in km/s)
     )
-    plt.xlabel("Collision time with Earth (Myr)")
+    plt.xlabel("$\\tau$ for Earth (Myr)")
     plt.ylabel("v$_o$ (km/s)")
 
     for i, v_o in enumerate(v_o_full):
@@ -246,7 +246,13 @@ def earth_lifetime_coll_time_plot(earth_df, colors) -> None:
         label="Minimum rock survival time",
     )
 
-    plt.legend()
+    # legend = plt.legend()
+    # handles, labels = plt.gca().get_legend_handles_labels()
+    # figLegend = plt.figure()
+    # plt.figlegend(handles, labels)
+    # figLegend.savefig(get_base_dir() + "/output/graphs/legend.png")
+    # legend.remove()
+
     plt.xscale("log")
     plt.savefig(get_base_dir() + "/output/graphs/lifetime_vs_coll_times.png")
 
@@ -277,13 +283,15 @@ def disk_lifetime_coll_time_plot(disk_df, colors, view) -> None:
         )
         for n_o, color in color_dict.items()
     ]
-    ax.legend(handles=patches)
-    ax.set_xlabel(f"log$_{{10}}$ of Collision time with disk's {view} (Myr)")
+    # ax.legend(handles=patches)
+    ax.set_xlabel(f"log$_{{10}}$ $\\tau$ (Myr)")
     ax.set_ylabel("v$_o$ (km/s)")
+    ax.set_title(f"Lifetime vs collision time for disk ({view})")
     ax.set_zlabel("Stellar mass (M$_\odot$)")
     plt.savefig(
-        f"{get_base_dir()}/output/graphs/lifetime_vs_coll_times_disk_{view}.png"
+        f"{get_base_dir()}/output/graphs/lifetime_vs_coll_times_disk_{view}.png",
     )
+    
     plt.close()
 
 

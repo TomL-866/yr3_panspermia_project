@@ -15,8 +15,8 @@ def get_stellar_mass_array() -> np.ndarray:
         np.ndarray: Stellar mass array (SI)
     """
     print("Calculating stellar masses...")
-    # return np.array(get_stellar_masses(), dtype=float)
-    return load_stellar_mass_file()
+    return np.array(get_stellar_masses(), dtype=float)
+    # return load_stellar_mass_file()
 
 
 def main(stellar_mass: np.ndarray) -> None:

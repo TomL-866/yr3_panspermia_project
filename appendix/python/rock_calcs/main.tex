@@ -20,9 +20,9 @@ def get_rock_dist() -> np.ndarray:
     Returns:
         np.ndarray: Rock mass distribution.
     """
-    # rock_masses: np.ndarray = np.array(get_rock_masses(), dtype=np.float64)
-    # return rock_masses
-    return np.load(f"{get_base_dir()}/output/values/rock_masses.npy")
+    rock_masses: np.ndarray = np.array(get_rock_masses(), dtype=np.float64)
+    return rock_masses
+    # return np.load(f"{get_base_dir()}/output/values/rock_masses.npy")
 
 
 def main() -> None:

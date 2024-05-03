@@ -19,7 +19,7 @@ language such as C or Fortran).
 
 This tutorial gives commands for running the project on Linux or Windows in bash or PowerShell respectively.
 
-Before doing anything else, download (if you do not have these already) the Rust compiler (see <https://www.rust-lang.org/tools/install>) and a Python 3 interpreter (see <https://www.python.org/downloads/>).
+Before doing anything else, download (if you do not have these already) the Rust compiler (see <https://www.rust-lang.org/tools/install>) and a Python 3.10 interpreter (see <https://www.python.org/downloads/>).
 
 Then follow the instructions below to run the project.
 
