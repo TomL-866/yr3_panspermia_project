@@ -23,7 +23,7 @@ Before doing anything else, download (if you do not have these already) the Rust
 
 Then follow the instructions below to run the project.
 
-## Run from scripts (Windows)
+## Run from scripts (Windows - Powershell)
 
 Run
 
