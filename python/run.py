@@ -22,8 +22,6 @@ if __name__ == "__main__":
     matplotlib.rcParams.update({"font.size": 14})
     matplotlib.rcParams.update({"figure.autolayout": True})
 
-    # Always put legend outside of the main plot area in the top right
-
     start = time.perf_counter()
 
     print("\n---PROGRAM START---")
